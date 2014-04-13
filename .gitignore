@@ -19,3 +19,11 @@
 *.exe
 *.out
 *.app
+/src/Debug/*.log
+/src/Debug/*.pdb
+/src/Debug/DirectX.tlog/*.tlog
+/src/Debug/*.ilk
+/src/Debug/DirectX.tlog/*.lastbuildstate
+/src/Debug/*.idb
+/src/*.sdf
+/src/*.suo
