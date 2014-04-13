@@ -86,24 +86,18 @@
     <ClInclude Include="mage\IGameLoop.h" />
     <ClInclude Include="mage\TString.h" />
     <ClInclude Include="mage\WindowsEvent.h" />
-    <ClInclude Include="MyGame.h" />
+    <ClInclude Include="Scene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="mage\Effect.cpp" />
     <ClCompile Include="mage\GameWindow.cpp" />
-    <ClCompile Include="MyGame.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="winmain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="SimpleShader.hlsl">
+    <FxCompile Include="SimpleShader.fx">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </FxCompile>
-    <FxCompile Include="transform.fx">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </FxCompile>
-    <FxCompile Include="wave.fx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </FxCompile>
   </ItemGroup>

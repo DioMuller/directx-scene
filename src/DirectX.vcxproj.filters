@@ -42,7 +42,7 @@
     <ClInclude Include="mage\WindowsEvent.h">
       <Filter>Mage</Filter>
     </ClInclude>
-    <ClInclude Include="MyGame.h">
+    <ClInclude Include="Scene.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -53,21 +53,15 @@
     <ClCompile Include="mage\GameWindow.cpp">
       <Filter>Mage</Filter>
     </ClCompile>
-    <ClCompile Include="MyGame.cpp">
+    <ClCompile Include="winmain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="winmain.cpp">
+    <ClCompile Include="Scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="SimpleShader.hlsl">
-      <Filter>Shaders</Filter>
-    </FxCompile>
-    <FxCompile Include="transform.fx">
-      <Filter>Shaders</Filter>
-    </FxCompile>
-    <FxCompile Include="wave.fx">
+    <FxCompile Include="SimpleShader.fx">
       <Filter>Shaders</Filter>
     </FxCompile>
   </ItemGroup>
