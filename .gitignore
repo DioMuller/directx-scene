@@ -27,3 +27,4 @@
 /src/Debug/*.idb
 /src/*.sdf
 /src/*.suo
+/src/*.opensdf

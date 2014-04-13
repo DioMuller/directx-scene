@@ -87,19 +87,11 @@
     <ClInclude Include="mage\TString.h" />
     <ClInclude Include="mage\WindowsEvent.h" />
     <ClInclude Include="MyGame.h" />
-    <ClInclude Include="RotatingTriangle.h" />
-    <ClInclude Include="Triangle.h" />
-    <ClInclude Include="Vertex.h" />
-    <ClInclude Include="WaveGrid.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="mage\Effect.cpp" />
     <ClCompile Include="mage\GameWindow.cpp" />
     <ClCompile Include="MyGame.cpp" />
-    <ClCompile Include="RotatingTriangle.cpp" />
-    <ClCompile Include="Triangle.cpp" />
-    <ClCompile Include="Vertex.cpp" />
-    <ClCompile Include="WaveGrid.cpp" />
     <ClCompile Include="winmain.cpp" />
   </ItemGroup>
   <ItemGroup>

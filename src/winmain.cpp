@@ -1,5 +1,5 @@
 #include "mage/GameWindow.h"
-#include "WaveGrid.h"
+#include "MyGame.h"
 
 // Equivalente windows do "Main"
 int WINAPI WinMain(HINSTANCE hInstance,
@@ -13,7 +13,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	if (window.setup(hInstance, nShowCmd, _T("Transformações - Pipeline programável"), 
 		100, 100, 800, 600))
 	{		
-		window.run(new WaveGrid()); //Se deu certo, roda o game loop
+		window.run(new MyGame()); //Se deu certo, roda o game loop
 	}
 
 	//Finalizamos o sistema.
