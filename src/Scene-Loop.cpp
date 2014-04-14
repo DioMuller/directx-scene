@@ -33,7 +33,7 @@ void Scene::setup(IDirect3DDevice9* device)
 		decl, &vertexDeclaration));
 
 	// Creates mesh
-	MyVertex vertices[] =
+	Vertex vertices[] =
 	{
 		{ D3DXVECTOR3(3.0f, -3.0f, 0.0f), D3DCOLOR_XRGB(0, 0, 255) },
 		{ D3DXVECTOR3(0.0f, 3.0f, 0.0f), D3DCOLOR_XRGB(0, 255, 0) },
@@ -44,7 +44,7 @@ void Scene::setup(IDirect3DDevice9* device)
 
 	// Creates Vertex Buffer
 	HR(device->CreateVertexBuffer(
-		numvertexes * sizeof(MyVertex), // Length 
+		numvertexes * sizeof(Vertex), // Length 
 		0, // Usage 
 		0, // FVF (deprecated) 
 		D3DPOOL_MANAGED, // Memory pool 
@@ -147,7 +147,7 @@ void Scene::paint(IDirect3DDevice9* device)
 		0, // Stream number 
 		vertexBuffer, // Data 
 		0, // Offset 
-		sizeof(MyVertex))); // Vertex data size
+		sizeof(Vertex))); // Vertex data size
 
 	//--------------------------------------------------
 	// Shader
