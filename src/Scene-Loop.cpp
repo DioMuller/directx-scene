@@ -5,8 +5,9 @@
 
 using namespace mage;
 
-Scene::Scene() : shader(_T("SimpleShader.fx"))
+Scene::Scene()
 {
+
 }
 
 Scene::~Scene()
@@ -17,57 +18,38 @@ void Scene::setup(IDirect3DDevice9* device)
 {
 	running = true;
 
-	angle = 0;
+	int cols = 50;
+	int rows = 50;
+	int width = 10.0f;
+	int height = 10.0f;
 
-	// Declares Vertex format
-	D3DVERTEXELEMENT9 decl[] = {
-		{ 0, 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT,
-		D3DDECLUSAGE_POSITION, 0 },
-		{ 0, 12, D3DDECLTYPE_D3DCOLOR, D3DDECLMETHOD_DEFAULT,
-		D3DDECLUSAGE_COLOR, 0 },
-		D3DDECL_END()
-	};
-	// Creates Vertex declaration
-	vertexDeclaration = nullptr;
-	HR(device->CreateVertexDeclaration(
-		decl, &vertexDeclaration));
+	// Generate Plane mesh vertexes and indexes.
+	Mesh plane = createPlaneMesh( width, height, cols, rows);
+	int indexCount = plane.indexes.size();
+	vertexCount = plane.vertexCount;
+	triangleCount = (cols - 1) * (rows - 1) * 2; // Two triangles per square
 
-	// Creates mesh
-	Vertex vertices[] =
+	// Create vertex buffer on the device.
+	vertexBuffer = Vertex::createVertexBuffer(device, plane.vertexes);
+
+	// Create index buffer on the device.
+	HR(device->CreateIndexBuffer(sizeof(WORD)* indexCount, 0, D3DFMT_INDEX16, D3DPOOL_MANAGED, &indexBuffer, nullptr));
+
+	// Writes indexes on the video memory.
+	WORD* pWord;
+	HR(indexBuffer->Lock(0, 0, reinterpret_cast<void**>(&pWord), 0));
+	for (int i = 0; i < indexCount; i++)
+		pWord[i] = static_cast<WORD>(plane.indexes[i]);
+	HR(indexBuffer->Unlock());
+
+	// Shader
+	ID3DXBuffer* errors = 0;
+	HR(D3DXCreateEffectFromFile(device, _T("SimpleShader.fx"), 0, 0, D3DXSHADER_DEBUG, 0, &shader, &errors));
+
+	if (errors)
 	{
-		{ D3DXVECTOR3(3.0f, -3.0f, 0.0f), D3DCOLOR_XRGB(0, 0, 255) },
-		{ D3DXVECTOR3(0.0f, 3.0f, 0.0f), D3DCOLOR_XRGB(0, 255, 0) },
-		{ D3DXVECTOR3(-3.0f, -3.0f, 0.0f), D3DCOLOR_XRGB(255, 0, 0) }
-	};
-
-	numvertexes = 3;
-
-	// Creates Vertex Buffer
-	HR(device->CreateVertexBuffer(
-		numvertexes * sizeof(Vertex), // Length 
-		0, // Usage 
-		0, // FVF (deprecated) 
-		D3DPOOL_MANAGED, // Memory pool 
-		&vertexBuffer, // Output to buffer 
-		nullptr)); // Use nullptr 
-
-	// Copy to Vertex Buffer
-	VOID* pVoid;
-	HR(vertexBuffer->Lock(0, 0, &pVoid, 0));
-	memcpy(pVoid, vertices, sizeof(vertices));
-	HR(vertexBuffer->Unlock());
-
-	// Deactivate Culling, since the scene will rotate
-	HR(device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE));
-
-	// Turn 3D Illumination off.
-	HR(device->SetRenderState(D3DRS_LIGHTING, FALSE));
-
-	// Initializes shader.
-	std::string errors = shader.compile(device);
-	if (!errors.empty())
-	{
-		MessageBoxA(0, errors.c_str(), 0, 0);
+		MessageBoxA(0, static_cast<char*>(errors->GetBufferPointer()), 0, 0);
+		exit(1);
 	}
 }
 
@@ -84,10 +66,8 @@ void Scene::processEvent(const WindowsEvent& evt)
 
 bool Scene::process(float time)
 {
-	//Gira 360 graus por segundo
-	angle += 360 * time;
-	while (angle >= 360)
-		angle -= 360;
+	// Nothing else to do, for now.
+
 	return AbstractGameLoop::process(time);
 }
 
@@ -99,9 +79,6 @@ void Scene::paint(IDirect3DDevice9* device)
     device->BeginScene();    // Begins Scene
 
 	// Drawing code BEGIN
-
-	// Sets vertex declaration to the one created on the setup() method.
-	HR(device->SetVertexDeclaration(vertexDeclaration));
 	
 	//--------------------------------------------------
 	// World transform
@@ -114,7 +91,7 @@ void Scene::paint(IDirect3DDevice9* device)
 
 	D3DXMATRIX rotation;
 	D3DXMatrixIdentity(&rotation);
-	D3DXMatrixRotationY(&rotation, D3DXToRadian(angle));
+	D3DXMatrixRotationY(&rotation, D3DXToRadian(180));
 
 	world = rotation * world;
 
@@ -142,6 +119,9 @@ void Scene::paint(IDirect3DDevice9* device)
 	//--------------------------------------------------
 	// Stream Source
 	//--------------------------------------------------
+	// Set vertex declaration
+	HR(device->SetVertexDeclaration(Vertex::getDeclaration(device)));
+
 	// Sets stream source
 	HR(device->SetStreamSource(
 		0, // Stream number 
@@ -149,27 +129,37 @@ void Scene::paint(IDirect3DDevice9* device)
 		0, // Offset 
 		sizeof(Vertex))); // Vertex data size
 
+	// Set indexes
+	HR(device->SetIndices(indexBuffer));
+
 	//--------------------------------------------------
 	// Shader
 	//--------------------------------------------------
-	shader.setTechnique("TransformTech");
+	
+	// Get technique
+	D3DXHANDLE tech = shader->GetTechniqueByName("TransformTech");
+	HR(shader->SetTechnique(tech));
 
-	shader.setMatrix("World", world);
-	shader.setMatrix("View", view);
-	shader.setMatrix("Projection", projection);
+	// Parameter definition
+	D3DXHANDLE hWorld = shader->GetParameterByName(0, "World");
+	HR(shader->SetMatrix(hWorld, &world));
 
-	//--------------------------------------------------
-	// Primitives Drawing
-	//--------------------------------------------------
+	D3DXHANDLE hView = shader->GetParameterByName(0, "View");
+	HR(shader->SetMatrix(hView, &view));
 
-	shader.execute([](IDirect3DDevice9* device)
+	D3DXHANDLE hProjection = shader->GetParameterByName(0, "Projection");
+	HR(shader->SetMatrix(hProjection, &projection));
+
+	// Passes
+	UINT passes = 0;
+	HR(shader->Begin(&passes, 0));
+	for (UINT i = 0; i < passes; ++i)
 	{
-		// Draws primitive (triangle)
-		HR(device->DrawPrimitive(
-			D3DPT_TRIANGLELIST, // Primitive 
-			0, // First index
-			1)); // Quantity 
-	});
+		HR(shader->BeginPass(i));
+		HR(device->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, vertexCount, 0, triangleCount));
+		HR(shader->EndPass());
+	}
+	HR(shader->End());
 
 	// Drawing Code END
 
@@ -189,6 +179,5 @@ void Scene::onRestoreDevice(IDirect3DDevice9* device)
 void Scene::shutDown(IDirect3DDevice9* device)
 {
 	// Release Mesh
-	vertexDeclaration->Release();
 	vertexBuffer->Release();
 }

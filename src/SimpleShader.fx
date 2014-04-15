@@ -43,7 +43,7 @@ technique TransformTech
 		vertexShader = compile vs_2_0 TransformVS();
 		pixelShader = compile ps_2_0 TransformPS();
 		//Especificamos os device states
-		FillMode = Solid;
+		FillMode = Wireframe;
 	}
 	pass P1
 	{

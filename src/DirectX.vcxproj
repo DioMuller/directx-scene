@@ -88,12 +88,14 @@
     <ClInclude Include="mage\WindowsEvent.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Structs.h" />
+    <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="mage\Effect.cpp" />
     <ClCompile Include="mage\GameWindow.cpp" />
     <ClCompile Include="Scene-Geometry.cpp" />
     <ClCompile Include="Scene-Loop.cpp" />
+    <ClCompile Include="Vertex.cpp" />
     <ClCompile Include="winmain.cpp" />
   </ItemGroup>
   <ItemGroup>

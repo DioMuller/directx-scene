@@ -8,14 +8,14 @@ class Scene : public mage::AbstractGameLoop
 	private:
 		// Vertex Buffer
 		IDirect3DVertexBuffer9* vertexBuffer;
-		// Vertex Declaration
-		IDirect3DVertexDeclaration9* vertexDeclaration;
+		// Index Buffer
+		IDirect3DIndexBuffer9* indexBuffer;
 		// Shader
-		mage::Effect shader;
+		ID3DXEffect* shader;
 		// Number of Vertexes
-		int numvertexes;
-		//Current angle
-		float angle;
+		int vertexCount;
+		// Number of triangles
+		int triangleCount;
 	public:
 		Scene(void);
 		~Scene(void);
