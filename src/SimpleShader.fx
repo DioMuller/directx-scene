@@ -31,7 +31,7 @@ float4 TransformPS(OutputVS inVS) : COLOR
 
 float4 TransformPS2(OutputVS inVS) : COLOR
 {
-	return float4(0.0f, 1.0f, 0.0f, 1.0f);
+	return float4(0.0f, 0.0f, 0.0f, 1.0f);
 }
 
 
@@ -43,7 +43,7 @@ technique TransformTech
 		vertexShader = compile vs_2_0 TransformVS();
 		pixelShader = compile ps_2_0 TransformPS();
 		//Especificamos os device states
-		FillMode = Wireframe;
+		FillMode = Solid;
 	}
 	pass P1
 	{

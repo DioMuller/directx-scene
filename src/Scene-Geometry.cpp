@@ -21,7 +21,7 @@ Mesh Scene::createPlaneMesh(float width, float height, int columns, int rows)
 	{
 		for (int j = 0; j < rows; j++)
 		{
-			result.vertexes.push_back({ D3DXVECTOR3(initial_x + i * diff_x, initial_y + j * diff_y, 0.0f), D3DCOLOR_XRGB(255, 255, 255) });
+			result.vertexes.push_back({ D3DXVECTOR3(initial_x + i * diff_x, initial_y + j * diff_y, 0.0f), D3DCOLOR_XRGB(128, 128, 128) });
 		}
 	}
 
