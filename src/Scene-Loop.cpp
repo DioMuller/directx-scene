@@ -87,11 +87,12 @@ void Scene::paint(IDirect3DDevice9* device)
 	// Translation Matrix
 	D3DXMATRIX world;
 
-	D3DXMatrixTranslation(&world, 1, 1, 0);
+	D3DXMatrixIdentity(&world);
+	//D3DXMatrixTranslation(&world, 0, 0, 0);
 
 	D3DXMATRIX rotation;
 	D3DXMatrixIdentity(&rotation);
-	D3DXMatrixRotationY(&rotation, D3DXToRadian(180));
+	//D3DXMatrixRotationY(&rotation, D3DXToRadian(180));
 
 	world = rotation * world;
 
@@ -101,7 +102,7 @@ void Scene::paint(IDirect3DDevice9* device)
 	D3DXMATRIX view;
 	//D3DXMatrixIdentity(&view);	
 	D3DXMatrixLookAtLH(&view,
-		&D3DXVECTOR3(0.0f, 0.0f, 10.0f), // posição da câmera
+		&D3DXVECTOR3(0.0f, 5.0f, 10.0f), // posição da câmera
 		&D3DXVECTOR3(0.0f, 0.0f, 0.0f),  // local para onde olha
 		&D3DXVECTOR3(0.0f, 1.0f, 0.0f)); // topo do mundo
 
