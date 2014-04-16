@@ -1,7 +1,7 @@
 #pragma once
 #include "mage/AbstractGameLoop.h"
 #include "mage/Effect.h"
-#include "Structs.h"
+#include "Mesh.h"
 
 class Scene : public mage::AbstractGameLoop
 {
@@ -17,8 +17,6 @@ class Scene : public mage::AbstractGameLoop
 		// Number of triangles
 		int triangleCount;
 
-		// Cilinder
-		ID3DXMesh* cilinder;
 	public:
 		Scene(void);
 		~Scene(void);

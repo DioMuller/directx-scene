@@ -44,10 +44,10 @@
     <ClInclude Include="Scene.h">
       <Filter>Scene\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Structs.h">
+    <ClInclude Include="Vertex.h">
       <Filter>Scene\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Vertex.h">
+    <ClInclude Include="Mesh.h">
       <Filter>Scene\Headers</Filter>
     </ClInclude>
   </ItemGroup>
@@ -66,6 +66,9 @@
       <Filter>Scene\Source</Filter>
     </ClCompile>
     <ClCompile Include="Vertex.cpp">
+      <Filter>Scene\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
       <Filter>Scene\Source</Filter>
     </ClCompile>
   </ItemGroup>

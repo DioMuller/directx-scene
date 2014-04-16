@@ -18,19 +18,17 @@ void Scene::setup(IDirect3DDevice9* device)
 {
 	running = true;
 
+	/* TEST */
 	int cols = 50;
 	int rows = 50;
 	int width = 10.0f;
 	int height = 10.0f;
 
 	// Generate Plane mesh vertexes and indexes.
-	Mesh plane = createPlaneMesh( width, height, cols, rows);
+	Mesh plane = createPlaneMesh(width, height, cols, rows);
 	int indexCount = plane.indexes.size();
 	vertexCount = plane.vertexCount;
 	triangleCount = (cols - 1) * (rows - 1) * 2; // Two triangles per square
-
-	// Generate Cylinder
-	D3DXCreateCylinder(device, 1.5, 1.5, 5, 20, 20, &cilinder, nullptr);
 
 	// Create vertex buffer on the device.
 	vertexBuffer = Vertex::createVertexBuffer(device, plane.vertexes);
@@ -44,6 +42,7 @@ void Scene::setup(IDirect3DDevice9* device)
 	for (int i = 0; i < indexCount; i++)
 		pWord[i] = static_cast<WORD>(plane.indexes[i]);
 	HR(indexBuffer->Unlock());
+	/* END TEST */
 
 	// Shader
 	ID3DXBuffer* errors = 0;
@@ -166,7 +165,9 @@ void Scene::paint(IDirect3DDevice9* device)
 		HR(device->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, vertexCount, 0, triangleCount));
 		HR(shader->EndPass());
 
-		HR(cilinder->DrawSubset(0));
+		D3DXMatrixTranslation(&world, 1, 0, 0);
+		D3DXHANDLE hWorld = shader->GetParameterByName(0, "World");
+		HR(shader->SetMatrix(hWorld, &world));
 	}
 	HR(shader->End());
 
