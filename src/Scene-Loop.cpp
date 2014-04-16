@@ -29,6 +29,9 @@ void Scene::setup(IDirect3DDevice9* device)
 	vertexCount = plane.vertexCount;
 	triangleCount = (cols - 1) * (rows - 1) * 2; // Two triangles per square
 
+	// Generate Cylinder
+	D3DXCreateCylinder(device, 1.5, 1.5, 5, 20, 20, &cilinder, nullptr);
+
 	// Create vertex buffer on the device.
 	vertexBuffer = Vertex::createVertexBuffer(device, plane.vertexes);
 
@@ -51,6 +54,9 @@ void Scene::setup(IDirect3DDevice9* device)
 		MessageBoxA(0, static_cast<char*>(errors->GetBufferPointer()), 0, 0);
 		exit(1);
 	}
+
+	//No lightning
+	HR(device->SetRenderState(D3DRS_LIGHTING, FALSE));
 }
 
 void Scene::processEvent(const WindowsEvent& evt)
@@ -159,6 +165,8 @@ void Scene::paint(IDirect3DDevice9* device)
 		HR(shader->BeginPass(i));
 		HR(device->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, vertexCount, 0, triangleCount));
 		HR(shader->EndPass());
+
+		HR(cilinder->DrawSubset(0));
 	}
 	HR(shader->End());
 

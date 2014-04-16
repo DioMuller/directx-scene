@@ -1,6 +1,5 @@
 #include "Scene.h"
 
-// TODO: Change to XZ instead of XY.
 Mesh Scene::createPlaneMesh(float width, float height, int columns, int rows)
 {
 	Mesh result;

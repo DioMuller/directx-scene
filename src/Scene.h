@@ -16,6 +16,9 @@ class Scene : public mage::AbstractGameLoop
 		int vertexCount;
 		// Number of triangles
 		int triangleCount;
+
+		// Cilinder
+		ID3DXMesh* cilinder;
 	public:
 		Scene(void);
 		~Scene(void);
