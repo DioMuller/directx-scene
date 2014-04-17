@@ -24,6 +24,8 @@ void Scene::setup(IDirect3DDevice9* device)
 	float width = 10.0f;
 	float height = 10.0f;
 
+	time = 0.0f;
+
 	// Generate Plane mesh vertexes and indexes.
 	plane = new PlaneMesh(width, height, cols, rows);
 	plane->Initialize(device);
@@ -59,7 +61,7 @@ void Scene::processEvent(const WindowsEvent& evt)
 bool Scene::process(float time)
 {
 	// Nothing else to do, for now.
-
+	this->time += time;
 	return AbstractGameLoop::process(time);
 }
 
@@ -113,10 +115,6 @@ void Scene::paint(IDirect3DDevice9* device)
 	// Shader
 	//--------------------------------------------------
 	
-	// Get technique
-	D3DXHANDLE tech = shader->GetTechniqueByName("TransformTech");
-	HR(shader->SetTechnique(tech));
-
 	// Parameter definition
 	D3DXHANDLE hWorld = shader->GetParameterByName(0, "World");
 	HR(shader->SetMatrix(hWorld, &world));
@@ -127,14 +125,35 @@ void Scene::paint(IDirect3DDevice9* device)
 	D3DXHANDLE hProjection = shader->GetParameterByName(0, "Projection");
 	HR(shader->SetMatrix(hProjection, &projection));
 
+	D3DXHANDLE hTime = shader->GetParameterByName(0, "Time");
+	HR(shader->SetFloat(hTime, time));
+
+	// Get technique
+	D3DXHANDLE tech = shader->GetTechniqueByName("TransformTech");
+	HR(shader->SetTechnique(tech));
+
 	// Passes
 	UINT passes = 0;
 	HR(shader->Begin(&passes, 0));
 	for (UINT i = 0; i < passes; ++i)
 	{
 		HR(shader->BeginPass(i));
-		plane->Render(device);
 		cube->Render(device);
+		HR(shader->EndPass());
+	}
+	HR(shader->End());
+
+	// Get technique
+	tech = shader->GetTechniqueByName("WaveTech");
+	HR(shader->SetTechnique(tech));
+
+	// Passes
+	passes = 0;
+	HR(shader->Begin(&passes, 0));
+	for (UINT i = 0; i < passes; ++i)
+	{
+		HR(shader->BeginPass(i));
+		plane->Render(device);
 		HR(shader->EndPass());
 	}
 	HR(shader->End());

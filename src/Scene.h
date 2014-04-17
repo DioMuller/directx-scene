@@ -12,6 +12,7 @@ class Scene : public mage::AbstractGameLoop
 		ID3DXEffect* shader;
 		PlaneMesh* plane;
 		CubeMesh* cube;
+		float time;
 
 	public:
 		Scene(void);
