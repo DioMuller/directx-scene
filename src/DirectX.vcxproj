@@ -86,6 +86,7 @@
     <ClInclude Include="mage\IGameLoop.h" />
     <ClInclude Include="mage\TString.h" />
     <ClInclude Include="mage\WindowsEvent.h" />
+    <ClInclude Include="PlaneMesh.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Vertex.h" />
@@ -94,8 +95,8 @@
     <ClCompile Include="mage\Effect.cpp" />
     <ClCompile Include="mage\GameWindow.cpp" />
     <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="Scene-Geometry.cpp" />
-    <ClCompile Include="Scene-Loop.cpp" />
+    <ClCompile Include="PlaneMesh.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Vertex.cpp" />
     <ClCompile Include="winmain.cpp" />
   </ItemGroup>

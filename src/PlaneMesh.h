@@ -1,0 +1,27 @@
+#pragma once
+#include "Mesh.h"
+class PlaneMesh :
+	public Mesh
+{
+	////////////////////////////////////
+	// Attributes
+	////////////////////////////////////
+	private:
+		float width; 
+		float height; 
+		int columns;
+		int rows;
+	////////////////////////////////////
+	// Constructors
+	////////////////////////////////////
+	public:
+		PlaneMesh(float width, float height, int columns, int rows);
+		~PlaneMesh();
+
+	////////////////////////////////////
+	// Constructors
+	////////////////////////////////////
+	public:
+		void GenerateMesh();
+};
+

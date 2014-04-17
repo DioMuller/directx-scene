@@ -25,24 +25,8 @@ void Scene::setup(IDirect3DDevice9* device)
 	int height = 10.0f;
 
 	// Generate Plane mesh vertexes and indexes.
-	Mesh plane = createPlaneMesh(width, height, cols, rows);
-	int indexCount = plane.indexes.size();
-	vertexCount = plane.vertexCount;
-	triangleCount = (cols - 1) * (rows - 1) * 2; // Two triangles per square
-
-	// Create vertex buffer on the device.
-	vertexBuffer = Vertex::createVertexBuffer(device, plane.vertexes);
-
-	// Create index buffer on the device.
-	HR(device->CreateIndexBuffer(sizeof(WORD)* indexCount, 0, D3DFMT_INDEX16, D3DPOOL_MANAGED, &indexBuffer, nullptr));
-
-	// Writes indexes on the video memory.
-	WORD* pWord;
-	HR(indexBuffer->Lock(0, 0, reinterpret_cast<void**>(&pWord), 0));
-	for (int i = 0; i < indexCount; i++)
-		pWord[i] = static_cast<WORD>(plane.indexes[i]);
-	HR(indexBuffer->Unlock());
-	/* END TEST */
+	plane = new PlaneMesh(width, height, cols, rows);
+	plane->Initialize(device);
 
 	// Shader
 	ID3DXBuffer* errors = 0;
@@ -123,22 +107,6 @@ void Scene::paint(IDirect3DDevice9* device)
 		100.0f);							 // Far
 
 	//--------------------------------------------------
-	// Stream Source
-	//--------------------------------------------------
-	// Set vertex declaration
-	HR(device->SetVertexDeclaration(Vertex::getDeclaration(device)));
-
-	// Sets stream source
-	HR(device->SetStreamSource(
-		0, // Stream number 
-		vertexBuffer, // Data 
-		0, // Offset 
-		sizeof(Vertex))); // Vertex data size
-
-	// Set indexes
-	HR(device->SetIndices(indexBuffer));
-
-	//--------------------------------------------------
 	// Shader
 	//--------------------------------------------------
 	
@@ -162,7 +130,7 @@ void Scene::paint(IDirect3DDevice9* device)
 	for (UINT i = 0; i < passes; ++i)
 	{
 		HR(shader->BeginPass(i));
-		HR(device->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, vertexCount, 0, triangleCount));
+		plane->Render(device);
 		HR(shader->EndPass());
 
 		D3DXMatrixTranslation(&world, 1, 0, 0);
@@ -188,6 +156,5 @@ void Scene::onRestoreDevice(IDirect3DDevice9* device)
 
 void Scene::shutDown(IDirect3DDevice9* device)
 {
-	// Release Mesh
-	vertexBuffer->Release();
+	delete plane;
 }

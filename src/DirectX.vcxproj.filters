@@ -18,6 +18,15 @@
     <Filter Include="Scene\Source">
       <UniqueIdentifier>{085880d6-ceaf-4ccd-9366-056614455a5c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Meshes">
+      <UniqueIdentifier>{18b995b5-e8c8-4b77-8c27-21891bbc5ebd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Meshes\Headers">
+      <UniqueIdentifier>{74e1d7b8-3bb2-4360-b915-2bcc65abc849}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Meshes\Source">
+      <UniqueIdentifier>{55e12742-b4a0-4ae4-b2b7-dd1188bac493}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mage\AbstractGameLoop.h">
@@ -48,8 +57,9 @@
       <Filter>Scene\Headers</Filter>
     </ClInclude>
     <ClInclude Include="Mesh.h">
-      <Filter>Scene\Headers</Filter>
+      <Filter>Meshes\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="PlaneMesh.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="mage\Effect.cpp">
@@ -59,16 +69,14 @@
       <Filter>Mage</Filter>
     </ClCompile>
     <ClCompile Include="winmain.cpp" />
-    <ClCompile Include="Scene-Loop.cpp">
-      <Filter>Scene\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene-Geometry.cpp">
-      <Filter>Scene\Source</Filter>
-    </ClCompile>
     <ClCompile Include="Vertex.cpp">
       <Filter>Scene\Source</Filter>
     </ClCompile>
     <ClCompile Include="Mesh.cpp">
+      <Filter>Meshes\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaneMesh.cpp" />
+    <ClCompile Include="Scene.cpp">
       <Filter>Scene\Source</Filter>
     </ClCompile>
   </ItemGroup>
