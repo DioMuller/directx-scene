@@ -19,10 +19,10 @@ void Scene::setup(IDirect3DDevice9* device)
 	running = true;
 
 	/* TEST */
-	int cols = 50;
-	int rows = 50;
-	float width = 10.0f;
-	float height = 10.0f;
+	int cols = 100;
+	int rows = 100;
+	float width = 150.0f;
+	float height = 150.0f;
 
 	time = 0.0f;
 

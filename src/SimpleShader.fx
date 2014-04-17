@@ -12,13 +12,13 @@ struct OutputVS
 };
 
 // Amplitude
-static float a = 2.0f;
+static float a = 1.0f;
 
 // Wave lenght
-static float k = 0.2f;
+static float k = 0.1f;
 
 // Angular frequency
-static float w = 4.0f;
+static float w = 2.0f;
 
 // Vertex Shader
 OutputVS TransformVS(float3 posL : POSITION0, float4 color : COLOR0)
@@ -111,6 +111,6 @@ technique WaveTech
 		vertexShader = compile vs_2_0 WaveVS();
 		pixelShader = compile ps_2_0 WavePS();
 		//Especificamos os device states
-		FillMode = Solid;
+		FillMode = Wireframe;
 	}
 }
