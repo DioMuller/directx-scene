@@ -59,7 +59,10 @@
     <ClInclude Include="Mesh.h">
       <Filter>Meshes\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="PlaneMesh.h" />
+    <ClInclude Include="PlaneMesh.h">
+      <Filter>Meshes\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CubeMesh.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="mage\Effect.cpp">
@@ -75,10 +78,13 @@
     <ClCompile Include="Mesh.cpp">
       <Filter>Meshes\Source</Filter>
     </ClCompile>
-    <ClCompile Include="PlaneMesh.cpp" />
     <ClCompile Include="Scene.cpp">
       <Filter>Scene\Source</Filter>
     </ClCompile>
+    <ClCompile Include="PlaneMesh.cpp">
+      <Filter>Meshes\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CubeMesh.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="SimpleShader.fx">

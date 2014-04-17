@@ -21,12 +21,15 @@ void Scene::setup(IDirect3DDevice9* device)
 	/* TEST */
 	int cols = 50;
 	int rows = 50;
-	int width = 10.0f;
-	int height = 10.0f;
+	float width = 10.0f;
+	float height = 10.0f;
 
 	// Generate Plane mesh vertexes and indexes.
 	plane = new PlaneMesh(width, height, cols, rows);
 	plane->Initialize(device);
+
+	cube = new CubeMesh(2.0f, 2.0f, 2.0f);
+	cube->Initialize(device);
 
 	// Shader
 	ID3DXBuffer* errors = 0;
@@ -131,11 +134,8 @@ void Scene::paint(IDirect3DDevice9* device)
 	{
 		HR(shader->BeginPass(i));
 		plane->Render(device);
+		cube->Render(device);
 		HR(shader->EndPass());
-
-		D3DXMatrixTranslation(&world, 1, 0, 0);
-		D3DXHANDLE hWorld = shader->GetParameterByName(0, "World");
-		HR(shader->SetMatrix(hWorld, &world));
 	}
 	HR(shader->End());
 

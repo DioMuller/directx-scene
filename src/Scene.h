@@ -3,6 +3,7 @@
 #include "mage/Effect.h"
 #include "Mesh.h"
 #include "PlaneMesh.h"
+#include "CubeMesh.h"
 
 class Scene : public mage::AbstractGameLoop
 {
@@ -10,6 +11,7 @@ class Scene : public mage::AbstractGameLoop
 		// Shader
 		ID3DXEffect* shader;
 		PlaneMesh* plane;
+		CubeMesh* cube;
 
 	public:
 		Scene(void);

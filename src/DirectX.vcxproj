@@ -79,6 +79,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CubeMesh.h" />
     <ClInclude Include="mage\AbstractGameLoop.h" />
     <ClInclude Include="mage\Effect.h" />
     <ClInclude Include="mage\GameWindow.h" />
@@ -92,6 +93,7 @@
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CubeMesh.cpp" />
     <ClCompile Include="mage\Effect.cpp" />
     <ClCompile Include="mage\GameWindow.cpp" />
     <ClCompile Include="Mesh.cpp" />
