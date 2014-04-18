@@ -35,7 +35,7 @@ void PlaneMesh::GenerateMesh()
 	{
 		for (int j = 0; j < rows; j++)
 		{
-			vertexes.push_back({ D3DXVECTOR3(initial_x + i * diff_x, 0.0f, initial_y + j * diff_y), D3DCOLOR_XRGB(256, 0, 256) });
+			vertexes.push_back({ D3DXVECTOR3(initial_x + i * diff_x, 0.0f, initial_y + j * diff_y), D3DCOLOR_XRGB(0, 0, 50) });
 		}
 	}
 
