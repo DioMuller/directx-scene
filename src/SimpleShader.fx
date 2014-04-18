@@ -122,6 +122,6 @@ technique WaveTech
 		vertexShader = compile vs_2_0 WaveVS();
 		pixelShader = compile ps_2_0 WavePS();
 		//Especificamos os device states
-		FillMode = Solid;
+		FillMode = Wireframe;
 	}
 }

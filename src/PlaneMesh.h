@@ -15,7 +15,7 @@ class PlaneMesh :
 	// Constructors
 	////////////////////////////////////
 	public:
-		PlaneMesh(float width, float height, int columns, int rows);
+		PlaneMesh(math::Vector3D position, float width, float height, int columns, int rows);
 		~PlaneMesh();
 
 	////////////////////////////////////

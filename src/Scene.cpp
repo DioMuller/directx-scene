@@ -17,6 +17,10 @@ Scene::~Scene()
 void Scene::setup(IDirect3DDevice9* device)
 {
 	running = true;
+	time = 0.0f;
+
+	// Create camera.
+	camera = new Camera(60.0f, 1.0f, 100.0f, 10.0f, 5.0f);
 
 	/* TEST */
 	int cols = 100;
@@ -24,13 +28,11 @@ void Scene::setup(IDirect3DDevice9* device)
 	float width = 150.0f;
 	float height = 150.0f;
 
-	time = 0.0f;
-
 	// Generate Plane mesh vertexes and indexes.
-	plane = new PlaneMesh(width, height, cols, rows);
+	plane = new PlaneMesh(math::Vector3D(0,0,0), width, height, cols, rows);
 	plane->Initialize(device);
 
-	cube = new CubeMesh(2.0f, 2.0f, 2.0f);
+	cube = new CubeMesh(math::Vector3D(0,0,0), 2.0f, 2.0f, 2.0f);
 	cube->Initialize(device);
 
 	// Shader
@@ -73,57 +75,15 @@ void Scene::paint(IDirect3DDevice9* device)
     device->BeginScene();    // Begins Scene
 
 	// Drawing code BEGIN
-	
-	//--------------------------------------------------
-	// World transform
-	//--------------------------------------------------
-
-	// Translation Matrix
-	D3DXMATRIX world;
-
-	D3DXMatrixIdentity(&world);
-	//D3DXMatrixTranslation(&world, 0, 0, 0);
-
-	D3DXMATRIX rotation;
-	D3DXMatrixIdentity(&rotation);
-	//D3DXMatrixRotationY(&rotation, D3DXToRadian(180));
-
-	world = rotation * world;
 
 	//--------------------------------------------------
-	// View transform
+	// Camera
 	//--------------------------------------------------
-	D3DXMATRIX view;
-	//D3DXMatrixIdentity(&view);	
-	D3DXMatrixLookAtLH(&view,
-		&D3DXVECTOR3(0.0f, 5.0f, 10.0f), // posição da câmera
-		&D3DXVECTOR3(0.0f, 0.0f, 0.0f),  // local para onde olha
-		&D3DXVECTOR3(0.0f, 1.0f, 0.0f)); // topo do mundo
-
-	//--------------------------------------------------
-	// Projection transform
-	//--------------------------------------------------
-	D3DXMATRIX projection;     // the projection transform matrix
-	D3DXMatrixPerspectiveFovLH(
-		&projection,
-		D3DXToRadian(60),					 // Vertical FOV
-		mage::GameWindow::get().getAspect(), // aspect ratio
-		1.0f,								 // Near
-		100.0f);							 // Far
+	camera->UpdateView(shader);
 
 	//--------------------------------------------------
 	// Shader
 	//--------------------------------------------------
-	
-	// Parameter definition
-	D3DXHANDLE hWorld = shader->GetParameterByName(0, "World");
-	HR(shader->SetMatrix(hWorld, &world));
-
-	D3DXHANDLE hView = shader->GetParameterByName(0, "View");
-	HR(shader->SetMatrix(hView, &view));
-
-	D3DXHANDLE hProjection = shader->GetParameterByName(0, "Projection");
-	HR(shader->SetMatrix(hProjection, &projection));
 
 	D3DXHANDLE hTime = shader->GetParameterByName(0, "Time");
 	HR(shader->SetFloat(hTime, time));
@@ -138,7 +98,7 @@ void Scene::paint(IDirect3DDevice9* device)
 	for (UINT i = 0; i < passes; ++i)
 	{
 		HR(shader->BeginPass(i));
-		cube->Render(device);
+		cube->Render(device, shader);
 		HR(shader->EndPass());
 	}
 	HR(shader->End());
@@ -153,7 +113,7 @@ void Scene::paint(IDirect3DDevice9* device)
 	for (UINT i = 0; i < passes; ++i)
 	{
 		HR(shader->BeginPass(i));
-		plane->Render(device);
+		plane->Render(device, shader);
 		HR(shader->EndPass());
 	}
 	HR(shader->End());
@@ -176,4 +136,6 @@ void Scene::onRestoreDevice(IDirect3DDevice9* device)
 void Scene::shutDown(IDirect3DDevice9* device)
 {
 	delete plane;
+	delete cube;
+	delete camera;
 }

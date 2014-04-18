@@ -2,12 +2,16 @@
 #include <d3dx9.h>
 #include <vector>
 #include "Vertex.h"
+#include "math/Vector3D.h"
 
 class Mesh
 {	
 	////////////////////////////////////
 	// Attributes
 	////////////////////////////////////
+	public:
+		math::Vector3D position;
+		math::Vector3D rotation;
 	protected:
 		std::vector<Vertex> vertexes;
 		std::vector<DWORD> indexes;
@@ -23,7 +27,7 @@ class Mesh
 	// Constructors
 	////////////////////////////////////
 	public:
-		Mesh();
+		Mesh(math::Vector3D position);
 		~Mesh();
 
 	////////////////////////////////////
@@ -32,5 +36,5 @@ class Mesh
 	public:
 		void Initialize(IDirect3DDevice9* device);
 		virtual void GenerateMesh();
-		void Render(IDirect3DDevice9* device);
+		void Render(IDirect3DDevice9* device, ID3DXEffect* shader);
 };

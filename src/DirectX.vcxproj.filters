@@ -7,17 +7,6 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{0a14695a-7197-43e8-9929-9ecd7772b185}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>
-      </Extensions>
-    </Filter>
-    <Filter Include="Scene\Headers">
-      <UniqueIdentifier>{0cbc0818-e43b-4624-873c-0200516694c3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene\Source">
-      <UniqueIdentifier>{085880d6-ceaf-4ccd-9366-056614455a5c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Meshes">
       <UniqueIdentifier>{18b995b5-e8c8-4b77-8c27-21891bbc5ebd}</UniqueIdentifier>
     </Filter>
@@ -26,6 +15,29 @@
     </Filter>
     <Filter Include="Meshes\Source">
       <UniqueIdentifier>{55e12742-b4a0-4ae4-b2b7-dd1188bac493}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>
+      </Extensions>
+    </Filter>
+    <Filter Include="Scenes\Headers">
+      <UniqueIdentifier>{0cbc0818-e43b-4624-873c-0200516694c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Source">
+      <UniqueIdentifier>{085880d6-ceaf-4ccd-9366-056614455a5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{bef8a479-77cb-43e0-a631-ea53032f1183}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering">
+      <UniqueIdentifier>{3212b312-00d1-49c3-9f5b-1d617021ba7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Headers">
+      <UniqueIdentifier>{3d8ebb19-1d61-4139-9d80-f67e2a3e8bd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Source">
+      <UniqueIdentifier>{77762362-5525-426e-9a86-dd4f787f914d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -51,10 +63,7 @@
       <Filter>Mage</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
-      <Filter>Scene\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Vertex.h">
-      <Filter>Scene\Headers</Filter>
+      <Filter>Scenes\Headers</Filter>
     </ClInclude>
     <ClInclude Include="Mesh.h">
       <Filter>Meshes\Headers</Filter>
@@ -65,6 +74,27 @@
     <ClInclude Include="CubeMesh.h">
       <Filter>Meshes\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="Vertex.h">
+      <Filter>Rendering\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="math\AffineTransform.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="math\MathUtil.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="math\Matrix3.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="math\Vector2D.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="math\Vector3D.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Rendering\Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="mage\Effect.cpp">
@@ -74,20 +104,41 @@
       <Filter>Mage</Filter>
     </ClCompile>
     <ClCompile Include="winmain.cpp" />
-    <ClCompile Include="Vertex.cpp">
-      <Filter>Scene\Source</Filter>
-    </ClCompile>
     <ClCompile Include="Mesh.cpp">
       <Filter>Meshes\Source</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
-      <Filter>Scene\Source</Filter>
+      <Filter>Scenes\Source</Filter>
     </ClCompile>
     <ClCompile Include="PlaneMesh.cpp">
       <Filter>Meshes\Source</Filter>
     </ClCompile>
     <ClCompile Include="CubeMesh.cpp">
       <Filter>Meshes\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Vertex.cpp">
+      <Filter>Rendering\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="math\AffineTransform.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="math\Main.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="math\MathUtil.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="math\Matrix3.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="math\Vector2D.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="math\Vector3D.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Rendering\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

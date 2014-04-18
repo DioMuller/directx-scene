@@ -79,6 +79,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="CubeMesh.h" />
     <ClInclude Include="mage\AbstractGameLoop.h" />
     <ClInclude Include="mage\Effect.h" />
@@ -87,15 +88,29 @@
     <ClInclude Include="mage\IGameLoop.h" />
     <ClInclude Include="mage\TString.h" />
     <ClInclude Include="mage\WindowsEvent.h" />
+    <ClInclude Include="math\AffineTransform.h" />
+    <ClInclude Include="math\MathUtil.h" />
+    <ClInclude Include="math\Matrix3.h" />
+    <ClInclude Include="math\Vector2D.h" />
+    <ClInclude Include="math\Vector3D.h" />
     <ClInclude Include="PlaneMesh.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CubeMesh.cpp" />
     <ClCompile Include="mage\Effect.cpp" />
     <ClCompile Include="mage\GameWindow.cpp" />
+    <ClCompile Include="math\AffineTransform.cpp" />
+    <ClCompile Include="math\Main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="math\MathUtil.cpp" />
+    <ClCompile Include="math\Matrix3.cpp" />
+    <ClCompile Include="math\Vector2D.cpp" />
+    <ClCompile Include="math\Vector3D.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="PlaneMesh.cpp" />
     <ClCompile Include="Scene.cpp" />

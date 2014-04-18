@@ -1,9 +1,10 @@
 #include "Mesh.h"
 #include "mage/HandleError.h"
 
-Mesh::Mesh()
+Mesh::Mesh(math::Vector3D position)
 {
-
+	this->position = position;
+	this->rotation = math::Vector3D(0.0f, 0.0f, 0.0f);
 }
 
 Mesh::~Mesh()
@@ -30,8 +31,25 @@ void Mesh::Initialize(IDirect3DDevice9* device)
 	HR(indexBuffer->Unlock());
 }
 
-void Mesh::Render(IDirect3DDevice9* device)
+void Mesh::Render(IDirect3DDevice9* device, ID3DXEffect* shader)
 {
+	// World Transform
+	D3DXMATRIX world;
+
+	D3DXMatrixIdentity(&world);
+	D3DXMatrixTranslation(&world, position.x, position.y, position.z);
+
+	D3DXMATRIX rotation;
+	D3DXMatrixIdentity(&rotation);
+	D3DXMatrixRotationX(&rotation, D3DXToRadian(this->rotation.x));
+	D3DXMatrixRotationY(&rotation, D3DXToRadian(this->rotation.y));
+	D3DXMatrixRotationZ(&rotation, D3DXToRadian(this->rotation.z));
+
+	world = rotation * world;
+
+	D3DXHANDLE hWorld = shader->GetParameterByName(0, "World");
+	HR(shader->SetMatrix(hWorld, &world));
+
 	// Set vertex declaration
 	HR(device->SetVertexDeclaration(Vertex::getDeclaration(device)));
 

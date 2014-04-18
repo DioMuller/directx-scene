@@ -4,14 +4,19 @@
 #include "Mesh.h"
 #include "PlaneMesh.h"
 #include "CubeMesh.h"
+#include "Camera.h"
 
 class Scene : public mage::AbstractGameLoop
 {
 	private:
 		// Shader
 		ID3DXEffect* shader;
+		// Meshes
 		PlaneMesh* plane;
 		CubeMesh* cube;
+		// Camera
+		Camera* camera;
+		// Update helpers
 		float time;
 
 	public:
