@@ -15,7 +15,7 @@ class CubeMesh :
 	// Constructor
 	////////////////////////////////////
 	public:
-		CubeMesh(math::Vector3D position, float width, float height, float depth);
+		CubeMesh(math::Vector3D position, std::string shaderTechnique, float width, float height, float depth);
 		~CubeMesh();
 
 	////////////////////////////////////

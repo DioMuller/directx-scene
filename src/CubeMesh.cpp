@@ -1,7 +1,7 @@
 #include "CubeMesh.h"
 
 
-CubeMesh::CubeMesh(math::Vector3D position, float width, float height, float depth) : Mesh(position)
+CubeMesh::CubeMesh(math::Vector3D position, std::string shaderTechnique, float width, float height, float depth) : Mesh(position, shaderTechnique)
 {
 	this->width = width;
 	this->height = height;

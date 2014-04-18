@@ -20,7 +20,7 @@ void Scene::setup(IDirect3DDevice9* device)
 	time = 0.0f;
 
 	// Create camera.
-	camera = new Camera(60.0f, 1.0f, 100.0f, 10.0f, 5.0f);
+	camera = new Camera(60.0f, 1.0f, 100.0f, -10.0f, 5.0f);
 
 	/* TEST */
 	int cols = 100;
@@ -29,10 +29,10 @@ void Scene::setup(IDirect3DDevice9* device)
 	float height = 150.0f;
 
 	// Generate Plane mesh vertexes and indexes.
-	plane = new PlaneMesh(math::Vector3D(0,0,0), width, height, cols, rows);
+	plane = new PlaneMesh(math::Vector3D(0, 0, 0), "WaveTech", width, height, cols, rows);
 	plane->Initialize(device);
-
-	cube = new CubeMesh(math::Vector3D(0,0,0), 2.0f, 2.0f, 2.0f);
+	
+	cube = new CubeMesh(math::Vector3D(0,0,0), "TransformTech", 2.0f, 2.0f, 2.0f);
 	cube->Initialize(device);
 
 	// Shader
@@ -64,6 +64,9 @@ bool Scene::process(float time)
 {
 	// Nothing else to do, for now.
 	this->time += time;
+	this->cube->position = math::Vector3D(0, 0, 1) * 5;
+	this->cube->position.rotateY(this->time);
+	this->cube->rotation.y = this->time;
 	return AbstractGameLoop::process(time);
 }
 
@@ -82,41 +85,14 @@ void Scene::paint(IDirect3DDevice9* device)
 	camera->UpdateView(shader);
 
 	//--------------------------------------------------
-	// Shader
+	// Rendering
 	//--------------------------------------------------
 
 	D3DXHANDLE hTime = shader->GetParameterByName(0, "Time");
 	HR(shader->SetFloat(hTime, time));
 
-	// Get technique
-	D3DXHANDLE tech = shader->GetTechniqueByName("TransformTech");
-	HR(shader->SetTechnique(tech));
-
-	// Passes
-	UINT passes = 0;
-	HR(shader->Begin(&passes, 0));
-	for (UINT i = 0; i < passes; ++i)
-	{
-		HR(shader->BeginPass(i));
-		cube->Render(device, shader);
-		HR(shader->EndPass());
-	}
-	HR(shader->End());
-
-	// Get technique
-	tech = shader->GetTechniqueByName("WaveTech");
-	HR(shader->SetTechnique(tech));
-
-	// Passes
-	passes = 0;
-	HR(shader->Begin(&passes, 0));
-	for (UINT i = 0; i < passes; ++i)
-	{
-		HR(shader->BeginPass(i));
-		plane->Render(device, shader);
-		HR(shader->EndPass());
-	}
-	HR(shader->End());
+	cube->Render(device, shader);
+	plane->Render(device, shader);
 
 	// Drawing Code END
 

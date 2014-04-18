@@ -19,6 +19,7 @@ class Mesh
 		int indexCount;
 		int triangleCount;
 		bool initialized;
+		std::string shaderTechnique;
 
 		IDirect3DVertexBuffer9* vertexBuffer;
 		IDirect3DIndexBuffer9* indexBuffer;
@@ -27,7 +28,7 @@ class Mesh
 	// Constructors
 	////////////////////////////////////
 	public:
-		Mesh(math::Vector3D position);
+		Mesh(math::Vector3D position, std::string shaderTechnique);
 		~Mesh();
 
 	////////////////////////////////////
@@ -36,5 +37,5 @@ class Mesh
 	public:
 		void Initialize(IDirect3DDevice9* device);
 		virtual void GenerateMesh();
-		void Render(IDirect3DDevice9* device, ID3DXEffect* shader);
+		void Render(IDirect3DDevice9* device, ID3DXEffect* shader, int maxPasses = INT_MAX);
 };
