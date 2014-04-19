@@ -94,6 +94,7 @@
     <ClInclude Include="math\Vector2D.h" />
     <ClInclude Include="math\Vector3D.h" />
     <ClInclude Include="PlaneMesh.h" />
+    <ClInclude Include="RaftMesh.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Vertex.h" />
@@ -113,6 +114,7 @@
     <ClCompile Include="math\Vector3D.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="PlaneMesh.cpp" />
+    <ClCompile Include="RaftMesh.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Vertex.cpp" />
     <ClCompile Include="winmain.cpp" />

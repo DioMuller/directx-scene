@@ -95,6 +95,9 @@
     <ClInclude Include="Camera.h">
       <Filter>Rendering\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="RaftMesh.h">
+      <Filter>Meshes\Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="mage\Effect.cpp">
@@ -139,6 +142,9 @@
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Rendering\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="RaftMesh.cpp">
+      <Filter>Meshes\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

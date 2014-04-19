@@ -20,7 +20,7 @@ void Scene::setup(IDirect3DDevice9* device)
 	time = 0.0f;
 
 	// Create camera.
-	camera = new Camera(60.0f, 1.0f, 100.0f, -10.0f, 5.0f);
+	camera = new Camera(60.0f, 1.0f, 100.0f, -20.0f, 5.0f);
 
 	/* TEST */
 	int cols = 100;
@@ -32,8 +32,8 @@ void Scene::setup(IDirect3DDevice9* device)
 	plane = new PlaneMesh(math::Vector3D(0, 0, 0), "WaveTech", width, height, cols, rows);
 	plane->Initialize(device);
 	
-	cube = new CubeMesh(math::Vector3D(0,0,0), "TransformTech", 2.0f, 2.0f, 2.0f);
-	cube->Initialize(device);
+	raft = new RaftMesh(math::Vector3D(0, 0, 0), "TransformTech", 5.0f, 4.0f, 5.0f);
+	raft->Initialize(device);
 
 	// Shader
 	ID3DXBuffer* errors = 0;
@@ -46,7 +46,7 @@ void Scene::setup(IDirect3DDevice9* device)
 	}
 
 	//No lightning
-	HR(device->SetRenderState(D3DRS_LIGHTING, FALSE));
+	HR(device->SetRenderState(D3DRS_LIGHTING, TRUE));
 }
 
 void Scene::processEvent(const WindowsEvent& evt)
@@ -64,16 +64,16 @@ bool Scene::process(float time)
 {
 	// Nothing else to do, for now.
 	this->time += time;
-	this->cube->position = math::Vector3D(0, 0, 1) * 5;
-	this->cube->position.rotateY(this->time);
-	this->cube->rotation.y = this->time;
+	this->raft->position = math::Vector3D(0, 0, 1) * 10;
+	this->raft->position.rotateY(this->time/4);
+	this->raft->rotation.y = this->time/4;
 	return AbstractGameLoop::process(time);
 }
 
 void Scene::paint(IDirect3DDevice9* device)
 {
     //Clear screen
-	device->Clear(0, nullptr, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0, 20, 80), 1.0f, 0);
+	device->Clear(0, nullptr, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(40, 40, 120), 1.0f, 0);
 
     device->BeginScene();    // Begins Scene
 
@@ -91,7 +91,7 @@ void Scene::paint(IDirect3DDevice9* device)
 	D3DXHANDLE hTime = shader->GetParameterByName(0, "Time");
 	HR(shader->SetFloat(hTime, time));
 
-	cube->Render(device, shader);
+	raft->Render(device, shader);
 	plane->Render(device, shader);
 
 	// Drawing Code END
@@ -112,6 +112,6 @@ void Scene::onRestoreDevice(IDirect3DDevice9* device)
 void Scene::shutDown(IDirect3DDevice9* device)
 {
 	delete plane;
-	delete cube;
+	delete raft;
 	delete camera;
 }

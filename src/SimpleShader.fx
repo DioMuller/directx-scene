@@ -22,10 +22,10 @@ struct OutputVS
 // Variables
 ////////////////////////////////////
 // Amplitude
-static float a = 1.0f;
+static float a = 0.5f;
 
 // Wave lenght
-static float k = 0.1f;
+static float k = 2.0f;
 
 // Angular frequency
 static float w = 2.0f;
@@ -46,7 +46,7 @@ float RadialWaves(float3 position)
 float4 GetIntensityFromHeight(float y)
 {
 	float c = y / a + 2;
-	return float4(c, c, c, 1.0f);
+	return float4(c, c, c, 0.4f);
 }
 
 ////////////////////////////////////
@@ -59,7 +59,7 @@ OutputVS TransformVS(float3 posL : POSITION0, float4 color : COLOR0)
 	// Zera nossa saída
 	OutputVS outVS = (OutputVS)0;
 
-	posL.y = posL.y + RadialWaves(posL);
+	posL.y = posL.y + RadialWaves(posL) + 0.2;
 
 	// Transforma no espaço homogêneo
 	outVS.posH = mul(float4(posL, 1.0f), wvp);
@@ -123,5 +123,6 @@ technique WaveTech
 		pixelShader = compile ps_2_0 WavePS();
 		//Especificamos os device states
 		FillMode = Solid;
+		AlphaBlendEnable = True;
 	}
 }

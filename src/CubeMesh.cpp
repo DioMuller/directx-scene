@@ -75,7 +75,7 @@ void CubeMesh::GenerateMesh()
 	indexes.push_back(0);
 	indexes.push_back(2);
 
-	// Top
+	// Bottom
 	indexes.push_back(4);
 	indexes.push_back(5);
 	indexes.push_back(0);
@@ -83,7 +83,7 @@ void CubeMesh::GenerateMesh()
 	indexes.push_back(5);
 	indexes.push_back(1);
 
-	// Bottom
+	// Top
 	indexes.push_back(2);
 	indexes.push_back(3);
 	indexes.push_back(6);
