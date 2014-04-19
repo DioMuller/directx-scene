@@ -102,7 +102,7 @@ OutputVS TerrainVS(float3 posL : POSITION0, float4 color : COLOR0)
 	// Zera nossa saída
 	OutputVS outVS = (OutputVS)0;
 
-	outVS.color = color;
+	outVS.color = float4(color.r / abs(posL.y / 2), color.g, color.b, color.a);
 
 	// Transforma no espaço homogêneo
 	outVS.posH = mul(float4(posL, 1.0f), wvp);

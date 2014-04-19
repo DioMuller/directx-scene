@@ -32,7 +32,7 @@ void Scene::setup(IDirect3DDevice9* device)
 	float height = 350.0f;
 
 	// Generate meshes.
-	terrain = new TerrainMesh(math::Vector3D(0, 0, 0), "TerrainTech", "heightmap.raw", cols, height, cols, rows, D3DCOLOR_XRGB(0, 150, 0));
+	terrain = new TerrainMesh(math::Vector3D(0, 0, 0), "TerrainTech", "heightmap.raw", width, height, cols, rows, D3DCOLOR_XRGB(150, 150, 0));
 	terrain->Initialize(device);
 
 	plane = new PlaneMesh(math::Vector3D(0, 0, 0), "WaveTech", width, height, cols, rows, D3DCOLOR_XRGB(0, 0, 150));
