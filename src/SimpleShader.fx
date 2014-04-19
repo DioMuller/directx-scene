@@ -56,7 +56,7 @@ float MeshMovement(float3 position)
 float4 GetIntensityFromHeight(float y)
 {
 	float c = y / a + 2;
-	return float4( c, c, c, 0.4f);
+	return float4( c, c, c, 1.0f);
 }
 
 ////////////////////////////////////
@@ -95,6 +95,21 @@ OutputVS WaveVS(float3 posL : POSITION0, float4 color : COLOR0)
 	return outVS;
 }
 
+OutputVS TerrainVS(float3 posL : POSITION0, float4 color : COLOR0)
+{
+	float4x4 wvp = mul(World, mul(View, Projection));
+
+	// Zera nossa saída
+	OutputVS outVS = (OutputVS)0;
+
+	outVS.color = color;
+
+	// Transforma no espaço homogêneo
+	outVS.posH = mul(float4(posL, 1.0f), wvp);
+
+	return outVS;
+}
+
 ////////////////////////////////////
 // Pixel Shader
 ////////////////////////////////////
@@ -108,6 +123,10 @@ float4 WavePS(OutputVS inVS) : COLOR
 	return float4(inVS.color.r, inVS.color.g, inVS.color.b, 0.5f);
 }
 
+float4 TerrainPS(OutputVS inVS) : COLOR
+{
+	return inVS.color;
+}
 
 ////////////////////////////////////
 // Techniques
@@ -119,6 +138,18 @@ technique TransformTech
 		//Especificamos os shaders dessa passada
 		vertexShader = compile vs_2_0 TransformVS();
 		pixelShader = compile ps_2_0 TransformPS();
+		//Especificamos os device states
+		FillMode = Solid;
+	}
+}
+
+technique TerrainTech
+{
+	pass P0
+	{
+		//Especificamos os shaders dessa passada
+		vertexShader = compile vs_2_0 TerrainVS();
+		pixelShader = compile ps_2_0 TerrainPS();
 		//Especificamos os device states
 		FillMode = Solid;
 	}

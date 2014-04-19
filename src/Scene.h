@@ -5,6 +5,7 @@
 #include "PlaneMesh.h"
 #include "CubeMesh.h"
 #include "RaftMesh.h"
+#include "TerrainMesh.h"
 #include "Camera.h"
 
 class Scene : public mage::AbstractGameLoop
@@ -14,7 +15,9 @@ class Scene : public mage::AbstractGameLoop
 		ID3DXEffect* shader;
 		// Meshes
 		PlaneMesh* plane;
+		TerrainMesh* terrain;
 		RaftMesh* raft;
+
 		// Camera
 		Camera* camera;
 		// Update helpers

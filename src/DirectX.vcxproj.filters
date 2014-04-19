@@ -39,6 +39,9 @@
     <Filter Include="Rendering\Source">
       <UniqueIdentifier>{77762362-5525-426e-9a86-dd4f787f914d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{e861a5ad-eaa2-4286-b6eb-a8734db694ff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mage\AbstractGameLoop.h">
@@ -98,6 +101,15 @@
     <ClInclude Include="RaftMesh.h">
       <Filter>Meshes\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="Table.h">
+      <Filter>Rendering\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Heightmap.h">
+      <Filter>Rendering\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="TerrainMesh.h">
+      <Filter>Meshes\Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="mage\Effect.cpp">
@@ -146,10 +158,21 @@
     <ClCompile Include="RaftMesh.cpp">
       <Filter>Meshes\Source</Filter>
     </ClCompile>
+    <ClCompile Include="Heightmap.cpp">
+      <Filter>Rendering\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="TerrainMesh.cpp">
+      <Filter>Meshes\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="SimpleShader.fx">
       <Filter>Shaders</Filter>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="heightmap.raw">
+      <Filter>Resources</Filter>
+    </None>
   </ItemGroup>
 </Project>

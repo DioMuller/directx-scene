@@ -1,12 +1,13 @@
 #include "PlaneMesh.h"
 
 
-PlaneMesh::PlaneMesh(math::Vector3D position, std::string shaderTechnique, float width, float height, int columns, int rows) : Mesh(position, shaderTechnique)
+PlaneMesh::PlaneMesh(math::Vector3D position, std::string shaderTechnique, float width, float height, int columns, int rows, D3DCOLOR color) : Mesh(position, shaderTechnique)
 {
 	this->width = width;
 	this->height = height;
 	this->columns = columns;
 	this->rows = rows;
+	this->color = color;
 }
 
 
@@ -16,13 +17,13 @@ PlaneMesh::~PlaneMesh()
 
 void PlaneMesh::GenerateMesh()
 {
-	// Distance difference between each vertex (x and Y)
+	// Distance difference between each vertex (x and Z)
 	float diff_x = width / (float)columns;
-	float diff_y = height / (float)rows;
+	float diff_z = height / (float)rows;
 
 	// Initial position where the mesh will be drawn. 
 	float initial_x = -(width / 2);
-	float initial_y = -(height / 2);
+	float initial_z = -(height / 2);
 
 	// Vertex count
 	vertexCount = columns * rows;
@@ -31,13 +32,7 @@ void PlaneMesh::GenerateMesh()
 	triangleCount = 0;
 
 	// Create vertexes
-	for (int i = 0; i < columns; i++)
-	{
-		for (int j = 0; j < rows; j++)
-		{
-			vertexes.push_back({ D3DXVECTOR3(initial_x + i * diff_x, 0.0f, initial_y + j * diff_y), D3DCOLOR_ARGB(128, 0, 0, 150) });
-		}
-	}
+	GenerateVertexes(initial_x, diff_x, initial_z, diff_z);
 
 	// Create indexes
 	for (int i = 0; i < rows - 1; ++i) // -1 because each triangle uses 2 rows.
@@ -63,5 +58,15 @@ void PlaneMesh::GenerateMesh()
 	}
 
 	indexCount = indexes.size();
+}
 
+void PlaneMesh::GenerateVertexes(float initial_x, float diff_x, float initial_z, float diff_z)
+{
+	for (int i = 0; i < columns; i++)
+	{
+		for (int j = 0; j < rows; j++)
+		{
+			vertexes.push_back({ D3DXVECTOR3(initial_x + i * diff_x, 0.0f, initial_z + j * diff_z), color });
+		}
+	}
 }

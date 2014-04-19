@@ -81,6 +81,7 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CubeMesh.h" />
+    <ClInclude Include="Heightmap.h" />
     <ClInclude Include="mage\AbstractGameLoop.h" />
     <ClInclude Include="mage\Effect.h" />
     <ClInclude Include="mage\GameWindow.h" />
@@ -97,11 +98,14 @@
     <ClInclude Include="RaftMesh.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Table.h" />
+    <ClInclude Include="TerrainMesh.h" />
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CubeMesh.cpp" />
+    <ClCompile Include="Heightmap.cpp" />
     <ClCompile Include="mage\Effect.cpp" />
     <ClCompile Include="mage\GameWindow.cpp" />
     <ClCompile Include="math\AffineTransform.cpp" />
@@ -116,6 +120,7 @@
     <ClCompile Include="PlaneMesh.cpp" />
     <ClCompile Include="RaftMesh.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="TerrainMesh.cpp" />
     <ClCompile Include="Vertex.cpp" />
     <ClCompile Include="winmain.cpp" />
   </ItemGroup>
@@ -125,6 +130,11 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="heightmap.raw">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </None>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -26,13 +26,16 @@ void Scene::setup(IDirect3DDevice9* device)
 	rotationDiff = D3DXToRadian(-90);
 
 	/* TEST */
-	int cols = 150;
-	int rows = 150;
+	int cols = 256;
+	int rows = 256;
 	float width = 350.0f;
 	float height = 350.0f;
 
-	// Generate Plane mesh vertexes and indexes.
-	plane = new PlaneMesh(math::Vector3D(0, 0, 0), "WaveTech", width, height, cols, rows);
+	// Generate meshes.
+	terrain = new TerrainMesh(math::Vector3D(0, 0, 0), "TerrainTech", "heightmap.raw", cols, height, cols, rows, D3DCOLOR_XRGB(0, 150, 0));
+	terrain->Initialize(device);
+
+	plane = new PlaneMesh(math::Vector3D(0, 0, 0), "WaveTech", width, height, cols, rows, D3DCOLOR_XRGB(0, 0, 150));
 	plane->Initialize(device);
 	
 	raft = new RaftMesh(math::Vector3D(0, 0, 0), "TransformTech", 5.0f, 4.0f, 5.0f);
@@ -98,6 +101,7 @@ void Scene::paint(IDirect3DDevice9* device)
 	HR(shader->SetFloat(hTime, time));
 
 	raft->Render(device, shader);
+	terrain->Render(device, shader);
 	plane->Render(device, shader);
 
     device->EndScene();    // Ends Scene
