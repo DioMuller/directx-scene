@@ -22,5 +22,6 @@ class RaftMesh : public Mesh
 	////////////////////////////////////
 	public:
 		void GenerateMesh();
+		void Render(IDirect3DDevice9* device, ID3DXEffect* shader, int maxPasses = INT_MAX);
 };
 

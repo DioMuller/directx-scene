@@ -19,6 +19,7 @@ class Scene : public mage::AbstractGameLoop
 		Camera* camera;
 		// Update helpers
 		float time;
+		float rotationDiff;
 
 	public:
 		Scene(void);

@@ -1,5 +1,5 @@
 #include "RaftMesh.h"
-
+#include "mage/HandleError.h"
 
 RaftMesh::RaftMesh(math::Vector3D position, std::string shaderTechnique, float width, float height, float depth) : Mesh(position, shaderTechnique)
 {
@@ -24,11 +24,11 @@ void RaftMesh::GenerateMesh()
 	float body_y = 0.0f;
 	float body_z = (depth / 2);
 
-	// Vertex count (8 mast, 4 body)
-	vertexCount = 12;
+	float sail_x = (width / 4);
+	float sail_y = height;
+	float sail_z = mast_z;
 
-	// Triangle count (10 mast, 2 body)
-	triangleCount = 12;
+	float height_dist = height/8.0f;
 
 	// Create vertexes (Mast)
 	//    5   6
@@ -51,6 +51,21 @@ void RaftMesh::GenerateMesh()
 	vertexes.push_back({ D3DXVECTOR3(body_x, body_y, -body_z), D3DCOLOR_XRGB(49, 8, 18) });
 	vertexes.push_back({ D3DXVECTOR3(-body_x, body_y, body_z), D3DCOLOR_XRGB(49, 8, 18) });
 	vertexes.push_back({ D3DXVECTOR3(body_x, body_y, body_z), D3DCOLOR_XRGB(49, 8, 18) });
+
+	// Create vertexes (Sail)
+	//    13  14
+	// 15   16
+	//
+	// 17  18
+	//    19   20
+	vertexes.push_back({ D3DXVECTOR3(-sail_x, sail_y, sail_z), D3DCOLOR_XRGB(128, 128, 128) });
+	vertexes.push_back({ D3DXVECTOR3(sail_x, sail_y, sail_z), D3DCOLOR_XRGB(128, 128, 128) });
+	vertexes.push_back({ D3DXVECTOR3(-sail_x, sail_y - height_dist, sail_z - height_dist), D3DCOLOR_XRGB(128, 128, 128) });
+	vertexes.push_back({ D3DXVECTOR3(sail_x, sail_y - height_dist, sail_z - height_dist), D3DCOLOR_XRGB(128, 128, 128) });
+	vertexes.push_back({ D3DXVECTOR3(-sail_x, sail_y - 5 * height_dist, sail_z - height_dist), D3DCOLOR_XRGB(128, 128, 128) });
+	vertexes.push_back({ D3DXVECTOR3(sail_x, sail_y - 5 *height_dist, sail_z - height_dist), D3DCOLOR_XRGB(128, 128, 128) });
+	vertexes.push_back({ D3DXVECTOR3(-sail_x, sail_y - 6 * height_dist, sail_z), D3DCOLOR_XRGB(128, 128, 128) });
+	vertexes.push_back({ D3DXVECTOR3(sail_x, sail_y - 6 * height_dist, sail_z), D3DCOLOR_XRGB(128, 128, 128) });
 
 	// Create indexes (Mast)
 	// Front
@@ -103,6 +118,43 @@ void RaftMesh::GenerateMesh()
 	indexes.push_back(11);
 	indexes.push_back(9);
 
-	indexCount = indexes.size();
+	// Indexes (Sail)
+	//    13  14
+	// 15   16
+	//
+	// 17  18
+	//    19   20
+	indexes.push_back(12);
+	indexes.push_back(13);
+	indexes.push_back(14);
+	indexes.push_back(14);
+	indexes.push_back(13);
+	indexes.push_back(15);
 
+	indexes.push_back(14);
+	indexes.push_back(15);
+	indexes.push_back(16);
+	indexes.push_back(16);
+	indexes.push_back(15);
+	indexes.push_back(17);
+
+	indexes.push_back(16);
+	indexes.push_back(17);
+	indexes.push_back(18);
+	indexes.push_back(18);
+	indexes.push_back(17);
+	indexes.push_back(19);
+
+	indexCount = indexes.size();
+	triangleCount = indexCount / 3;
+	vertexCount = vertexes.size();
+
+}
+
+void RaftMesh::Render(IDirect3DDevice9* device, ID3DXEffect* shader, int maxPasses)
+{
+	D3DXVECTOR4 pos = D3DXVECTOR4(position.x, position.y, position.z, 0);
+	D3DXHANDLE hPosition = shader->GetParameterByName(0, "MeshPosition");
+	HR(shader->SetVector(hPosition, &pos));
+	Mesh::Render(device, shader, maxPasses);
 }

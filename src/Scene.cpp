@@ -22,11 +22,14 @@ void Scene::setup(IDirect3DDevice9* device)
 	// Create camera.
 	camera = new Camera(60.0f, 1.0f, 100.0f, -20.0f, 5.0f);
 
+	// Raft rotation extra value.
+	rotationDiff = D3DXToRadian(-90);
+
 	/* TEST */
-	int cols = 100;
-	int rows = 100;
-	float width = 150.0f;
-	float height = 150.0f;
+	int cols = 150;
+	int rows = 150;
+	float width = 350.0f;
+	float height = 350.0f;
 
 	// Generate Plane mesh vertexes and indexes.
 	plane = new PlaneMesh(math::Vector3D(0, 0, 0), "WaveTech", width, height, cols, rows);
@@ -46,7 +49,10 @@ void Scene::setup(IDirect3DDevice9* device)
 	}
 
 	//No lightning
-	HR(device->SetRenderState(D3DRS_LIGHTING, TRUE));
+	HR(device->SetRenderState(D3DRS_LIGHTING, FALSE));
+
+	// No Culling
+	HR(device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE));
 }
 
 void Scene::processEvent(const WindowsEvent& evt)
@@ -66,14 +72,14 @@ bool Scene::process(float time)
 	this->time += time;
 	this->raft->position = math::Vector3D(0, 0, 1) * 10;
 	this->raft->position.rotateY(this->time/4);
-	this->raft->rotation.y = this->time/4;
+	this->raft->rotation.y = this->time / 4 + rotationDiff;
 	return AbstractGameLoop::process(time);
 }
 
 void Scene::paint(IDirect3DDevice9* device)
 {
     //Clear screen
-	device->Clear(0, nullptr, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(40, 40, 120), 1.0f, 0);
+	device->Clear(0, nullptr, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(101, 156, 239), 1.0f, 0);
 
     device->BeginScene();    // Begins Scene
 
@@ -93,8 +99,6 @@ void Scene::paint(IDirect3DDevice9* device)
 
 	raft->Render(device, shader);
 	plane->Render(device, shader);
-
-	// Drawing Code END
 
     device->EndScene();    // Ends Scene
 

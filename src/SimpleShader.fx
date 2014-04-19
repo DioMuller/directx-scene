@@ -7,6 +7,7 @@ uniform extern float4x4 Projection;
 
 uniform extern float Time;
 uniform extern float3 Source;
+uniform extern float4 MeshPosition;
 
 ////////////////////////////////////
 // Structs
@@ -25,7 +26,7 @@ struct OutputVS
 static float a = 0.5f;
 
 // Wave lenght
-static float k = 2.0f;
+static float k = 15.0f;
 
 // Angular frequency
 static float w = 2.0f;
@@ -43,10 +44,19 @@ float RadialWaves(float3 position)
 	return a*sin(k*d - Time*w);
 }
 
+float MeshMovement(float3 position)
+{
+	//Calculamos a distância entre a origem das ondas e a posição do vértice
+	float d = distance(Source.xz, MeshPosition.xz);
+
+	//Calculamos a altura da onda
+	return a*sin(k*d - Time*w);
+}
+
 float4 GetIntensityFromHeight(float y)
 {
 	float c = y / a + 2;
-	return float4(c, c, c, 0.4f);
+	return float4( c, c, c, 0.4f);
 }
 
 ////////////////////////////////////
@@ -59,7 +69,7 @@ OutputVS TransformVS(float3 posL : POSITION0, float4 color : COLOR0)
 	// Zera nossa saída
 	OutputVS outVS = (OutputVS)0;
 
-	posL.y = posL.y + RadialWaves(posL) + 0.2;
+	posL.y = posL.y + MeshMovement(posL) + 0.2;
 
 	// Transforma no espaço homogêneo
 	outVS.posH = mul(float4(posL, 1.0f), wvp);
@@ -95,7 +105,7 @@ float4 TransformPS(OutputVS inVS) : COLOR
 
 float4 WavePS(OutputVS inVS) : COLOR
 {
-	return inVS.color;
+	return float4(inVS.color.r, inVS.color.g, inVS.color.b, 0.5f);
 }
 
 
@@ -118,11 +128,16 @@ technique WaveTech
 {
 	pass P0
 	{
-		//Especificamos os shaders dessa passada
+		// Shaders
 		vertexShader = compile vs_2_0 WaveVS();
 		pixelShader = compile ps_2_0 WavePS();
-		//Especificamos os device states
+		// Device States
+		// Fill Mode
 		FillMode = Solid;
-		AlphaBlendEnable = True;
+		// Transparency
+		AlphaBlendEnable = true;
+		SrcBlend = SrcAlpha;
+		DestBlend = InvSrcAlpha;
+		BlendOp = Add;
 	}
 }
