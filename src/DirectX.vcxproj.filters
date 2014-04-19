@@ -174,5 +174,8 @@
     <None Include="heightmap.raw">
       <Filter>Resources</Filter>
     </None>
+    <None Include="heightmap_2.raw">
+      <Filter>Resources</Filter>
+    </None>
   </ItemGroup>
 </Project>
