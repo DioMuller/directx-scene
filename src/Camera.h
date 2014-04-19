@@ -11,6 +11,8 @@ class Camera
 		float nearDistance;
 		float farDistance;
 		float verticalFov;
+		float distanceFromAt;
+		float rotation;
 		math::Vector3D eye;
 		math::Vector3D at;
 		math::Vector3D up;
@@ -27,5 +29,6 @@ class Camera
 	////////////////////////////////////
 	public:
 		void UpdateView(ID3DXEffect* shader);
+		void Rotate(float rad);
 };
 

@@ -13,7 +13,7 @@ class TerrainMesh : public PlaneMesh
 	// Constructors
 	////////////////////////////////////
 	public:
-		TerrainMesh(math::Vector3D position, std::string shaderTechnique, std::string Heightmap, float width, float height, int columns, int rows, D3DCOLOR color);
+		TerrainMesh(math::Vector3D position, std::string shaderTechnique, std::string Heightmap, float heightScale, float heightOffset, float width, float height, int columns, int rows, D3DCOLOR color);
 		~TerrainMesh();
 
 	////////////////////////////////////

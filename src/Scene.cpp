@@ -20,7 +20,8 @@ void Scene::setup(IDirect3DDevice9* device)
 	time = 0.0f;
 
 	// Create camera.
-	camera = new Camera(60.0f, 1.0f, 100.0f, -20.0f, 5.0f);
+	camera = new Camera(60.0f, 1.0f, 500.0f, -20.0f, 5.0f);
+	cameraRotation = 0;
 
 	// Raft rotation extra value.
 	rotationDiff = D3DXToRadian(-90);
@@ -28,18 +29,28 @@ void Scene::setup(IDirect3DDevice9* device)
 	/* TEST */
 	int cols = 256;
 	int rows = 256;
-	float width = 350.0f;
-	float height = 350.0f;
+	float width = 300.0f;
+	float height = 300.0f;
 
 	// Generate meshes.
-	terrain = new TerrainMesh(math::Vector3D(0, 0, 0), "TerrainTech", "heightmap.raw", width, height, cols, rows, D3DCOLOR_XRGB(150, 150, 0));
+	terrain = new TerrainMesh(math::Vector3D(0, 0, 0), "TerrainTech", "heightmap_2.raw", 1.0f, -85.0f, width * 2, height * 2, cols, rows, D3DCOLOR_XRGB(150, 150, 0));
 	terrain->Initialize(device);
 
 	plane = new PlaneMesh(math::Vector3D(0, 0, 0), "WaveTech", width, height, cols, rows, D3DCOLOR_XRGB(0, 0, 150));
 	plane->Initialize(device);
 	
-	raft = new RaftMesh(math::Vector3D(0, 0, 0), "TransformTech", 5.0f, 4.0f, 5.0f);
+	raft = new RaftMesh(math::Vector3D(0, 0, 10), "TransformTech", 5.0f, 4.0f, 5.0f);
 	raft->Initialize(device);
+
+	boxes.push_back(new CubeMesh(math::Vector3D(0, 0, 0), "TransformTech", 1, 1, 1));
+	boxes.push_back(new CubeMesh(math::Vector3D(15, 0, -15), "TransformTech", 1, 1, 1));
+	boxes.push_back(new CubeMesh(math::Vector3D(25, 0, 5), "TransformTech", 1, 1, 1));
+	boxes.push_back(new CubeMesh(math::Vector3D(-35, 0, 5), "TransformTech", 1, 1, 1));
+
+	for (CubeMesh* mesh : boxes)
+	{
+		mesh->Initialize(device);
+	}
 
 	// Shader
 	ID3DXBuffer* errors = 0;
@@ -62,10 +73,22 @@ void Scene::processEvent(const WindowsEvent& evt)
 {
 	switch (evt.type)
 	{
-		case WM_KEYDOWN:
-			if( evt.wParam == VK_ESCAPE )
-				running = false;
-			return;
+	case WM_KEYDOWN:
+		if (evt.wParam == VK_ESCAPE)
+			running = false;
+		if (evt.wParam == VK_RIGHT)
+			cameraRotation += 1;
+		if (evt.wParam == VK_LEFT)
+			cameraRotation -= 1;
+		break;
+	case WM_KEYUP:
+		if (evt.wParam == VK_RIGHT)
+			cameraRotation -= 1;
+		if (evt.wParam == VK_LEFT)
+			cameraRotation += 1;
+		break;
+		
+		return;
 	}
 }
 
@@ -92,6 +115,7 @@ void Scene::paint(IDirect3DDevice9* device)
 	// Camera
 	//--------------------------------------------------
 	camera->UpdateView(shader);
+	if (cameraRotation != 0) camera->Rotate(D3DXToRadian(cameraRotation));
 
 	//--------------------------------------------------
 	// Rendering
@@ -102,6 +126,12 @@ void Scene::paint(IDirect3DDevice9* device)
 
 	raft->Render(device, shader);
 	terrain->Render(device, shader);
+
+	for (CubeMesh* mesh : boxes)
+	{
+		mesh->Render(device, shader);
+	}
+
 	plane->Render(device, shader);
 
     device->EndScene();    // Ends Scene

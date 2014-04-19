@@ -1,4 +1,5 @@
 #include "CubeMesh.h"
+#include "mage/HandleError.h"
 
 
 CubeMesh::CubeMesh(math::Vector3D position, std::string shaderTechnique, float width, float height, float depth) : Mesh(position, shaderTechnique)
@@ -31,15 +32,15 @@ void CubeMesh::GenerateMesh()
 	// 1   2
 	//    7   8
 	// 3   4
-	vertexes.push_back({ D3DXVECTOR3(-norm_x, -norm_y, norm_z), D3DCOLOR_XRGB(128, 0, 0) });
-	vertexes.push_back({ D3DXVECTOR3(norm_x, -norm_y, norm_z), D3DCOLOR_XRGB(128, 0, 0) });
-	vertexes.push_back({ D3DXVECTOR3(-norm_x, norm_y, norm_z), D3DCOLOR_XRGB(128, 0, 0) });
-	vertexes.push_back({ D3DXVECTOR3(norm_x, norm_y, norm_z), D3DCOLOR_XRGB(128, 0, 0) });
+	vertexes.push_back({ D3DXVECTOR3(-norm_x, -norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18) });
+	vertexes.push_back({ D3DXVECTOR3(norm_x, -norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18) });
+	vertexes.push_back({ D3DXVECTOR3(-norm_x, norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18) });
+	vertexes.push_back({ D3DXVECTOR3(norm_x, norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18) });
 
-	vertexes.push_back({ D3DXVECTOR3(-norm_x, -norm_y, -norm_z), D3DCOLOR_XRGB(128, 0, 0) });
-	vertexes.push_back({ D3DXVECTOR3(norm_x, -norm_y, -norm_z), D3DCOLOR_XRGB(128, 0, 0) });
-	vertexes.push_back({ D3DXVECTOR3(-norm_x, norm_y, -norm_z), D3DCOLOR_XRGB(128, 0, 0) });
-	vertexes.push_back({ D3DXVECTOR3(norm_x, norm_y, -norm_z), D3DCOLOR_XRGB(128, 0, 0) });
+	vertexes.push_back({ D3DXVECTOR3(-norm_x, -norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18) });
+	vertexes.push_back({ D3DXVECTOR3(norm_x, -norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18) });
+	vertexes.push_back({ D3DXVECTOR3(-norm_x, norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18) });
+	vertexes.push_back({ D3DXVECTOR3(norm_x, norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18) });
 
 	// Create indexes
 
@@ -93,4 +94,12 @@ void CubeMesh::GenerateMesh()
 
 	indexCount = indexes.size();
 
+}
+
+void CubeMesh::Render(IDirect3DDevice9* device, ID3DXEffect* shader, int maxPasses)
+{
+	D3DXVECTOR4 pos = D3DXVECTOR4(position.x, position.y, position.z, 0);
+	D3DXHANDLE hPosition = shader->GetParameterByName(0, "MeshPosition");
+	HR(shader->SetVector(hPosition, &pos));
+	Mesh::Render(device, shader, maxPasses);
 }

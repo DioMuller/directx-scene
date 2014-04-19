@@ -11,6 +11,9 @@ Camera::Camera(float verticalFov, float nearDistance, float farDistance, float d
 	this->nearDistance = nearDistance;
 	this->farDistance = farDistance;
 
+	this->distanceFromAt = distanceFromCamera;
+	this->rotation = 0.0f;
+
 	this->eye = math::Vector3D(0.0f, cameraHeight, distanceFromCamera);
 	this->at = math::Vector3D(0.0f, 0.0f, 0.0f);
 	this->up = math::Vector3D(0.0f, 1.0f, 0.0f);
@@ -56,4 +59,12 @@ void Camera::UpdateView(ID3DXEffect* shader)
 
 	D3DXHANDLE hView = shader->GetParameterByName(0, "View");
 	HR(shader->SetMatrix(hView, &view));
+}
+
+void Camera::Rotate(float rad)
+{
+	rotation += rad;
+	math::Vector2D cam_xz = xz(math::Vector3D(0.0f, 0.0f, 1.0f)).rotate(rad) * distanceFromAt;
+	eye.x = cam_xz.x;
+	eye.z = cam_xz.y;
 }

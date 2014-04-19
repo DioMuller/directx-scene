@@ -17,9 +17,12 @@ class Scene : public mage::AbstractGameLoop
 		PlaneMesh* plane;
 		TerrainMesh* terrain;
 		RaftMesh* raft;
+		std::vector<CubeMesh*> boxes;
 
 		// Camera
 		Camera* camera;
+		int cameraRotation;
+
 		// Update helpers
 		float time;
 		float rotationDiff;

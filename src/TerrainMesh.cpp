@@ -3,10 +3,10 @@
 ////////////////////////////////////
 // Constructors
 ////////////////////////////////////
-TerrainMesh::TerrainMesh(math::Vector3D position, std::string shaderTechnique, std::string heightmap, float width, float height, int columns, int rows, D3DCOLOR color)
+TerrainMesh::TerrainMesh(math::Vector3D position, std::string shaderTechnique, std::string heightmap, float heightScale, float heightOffset, float width, float height, int columns, int rows, D3DCOLOR color)
 	: PlaneMesh(position, shaderTechnique, width, height, columns, rows, color)
 {
-	this->heightmap.loadRAW(columns, rows, heightmap.c_str(), 1.0f, -70.0f);
+	this->heightmap.loadRAW(columns, rows, heightmap.c_str(), heightScale, heightOffset);
 }
 
 
