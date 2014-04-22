@@ -9,18 +9,18 @@ Vertex::Vertex() : position(), color()
 {
 }
 
-Vertex::Vertex(const D3DXVECTOR3& _position, const D3DCOLOR& _color)
-: position(_position), color(_color)
+Vertex::Vertex(const D3DXVECTOR3& _position, const D3DCOLOR& _color, const D3DXVECTOR2& _texture)
+: position(_position), color(_color), texture(_texture)
 {
 }
 
-Vertex::Vertex(const D3DXVECTOR3& _position, float r, float g, float b, float a)
-: position(_position), color(D3DCOLOR_COLORVALUE(r, g, b, a))
+Vertex::Vertex(const D3DXVECTOR3& _position, float r, float g, float b, float a, float u, float v)
+: position(_position), color(D3DCOLOR_COLORVALUE(r, g, b, a)), texture(u,v)
 {
 }
 
-Vertex::Vertex(float x, float y, float z, float r, float g, float b, float a)
-: position(x, y, z), color(D3DCOLOR_COLORVALUE(r, g, b, a))
+Vertex::Vertex(float x, float y, float z, float r, float g, float b, float a, float u, float v)
+: position(x, y, z), color(D3DCOLOR_COLORVALUE(r, g, b, a)), texture(u, v)
 {
 }
 
@@ -34,6 +34,7 @@ IDirect3DVertexDeclaration9* Vertex::getDeclaration(IDirect3DDevice9* device)
 	{
 		{ 0, 0, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
 		{ 0, 12, D3DDECLTYPE_D3DCOLOR, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_COLOR, 0 },
+		{ 0, 16, D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
 		D3DDECL_END()
 	};
 
