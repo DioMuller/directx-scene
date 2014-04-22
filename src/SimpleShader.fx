@@ -56,7 +56,7 @@ float MeshMovement(float3 position)
 float4 GetIntensityFromHeight(float y)
 {
 	float c = y / a + 2;
-	return float4( c, c, c, 1.0f);
+	return float4( c, c, c * 0.8, 1.0f);
 }
 
 ////////////////////////////////////
