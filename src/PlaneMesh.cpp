@@ -66,7 +66,7 @@ void PlaneMesh::GenerateVertexes(float initial_x, float diff_x, float initial_z,
 	{
 		for (int j = 0; j < rows; j++)
 		{
-			vertexes.push_back({ D3DXVECTOR3(initial_x + i * diff_x, 0.0f, initial_z + j * diff_z), color });
+			vertexes.push_back({ D3DXVECTOR3(initial_x + i * diff_x, 0.0f, initial_z + j * diff_z), color, D3DXVECTOR2(0, 0) });
 		}
 	}
 }

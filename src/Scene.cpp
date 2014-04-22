@@ -36,7 +36,7 @@ void Scene::setup(IDirect3DDevice9* device)
 	terrain = new TerrainMesh(math::Vector3D(0, 0, 0), "TerrainTech", "heightmap_2.raw", 1.0f, -85.0f, width * 2, height * 2, cols, rows, D3DCOLOR_XRGB(150, 150, 0));
 	terrain->Initialize(device);
 
-	plane = new PlaneMesh(math::Vector3D(0, 0, 0), "WaveTech", width, height, cols, rows, D3DCOLOR_XRGB(0, 0, 150));
+	plane = new PlaneMesh(math::Vector3D(0, 0, 0), "WaveTech", width, height, cols, rows, D3DCOLOR_XRGB(0, 0, 120));
 	plane->Initialize(device);
 	
 	raft = new RaftMesh(math::Vector3D(0, 0, 10), "TransformTech", 5.0f, 4.0f, 5.0f);

@@ -35,22 +35,22 @@ void RaftMesh::GenerateMesh()
 	// 1   2
 	//    7   8
 	// 3   4
-	vertexes.push_back({ D3DXVECTOR3(-mast_x, 0.0f, mast_z), D3DCOLOR_XRGB(49, 8, 18) });
-	vertexes.push_back({ D3DXVECTOR3(mast_x, 0.0f, mast_z), D3DCOLOR_XRGB(49, 8, 18) });
-	vertexes.push_back({ D3DXVECTOR3(-mast_x, mast_y, mast_z), D3DCOLOR_XRGB(49, 8, 18) });
-	vertexes.push_back({ D3DXVECTOR3(mast_x, mast_y, mast_z), D3DCOLOR_XRGB(49, 8, 18) });
-	vertexes.push_back({ D3DXVECTOR3(-mast_x, 0.0f, -mast_z), D3DCOLOR_XRGB(49, 8, 18) });
-	vertexes.push_back({ D3DXVECTOR3(mast_x, 0.0f, -mast_z), D3DCOLOR_XRGB(49, 8, 18) });
-	vertexes.push_back({ D3DXVECTOR3(-mast_x, mast_y, -mast_z), D3DCOLOR_XRGB(49, 8, 18) });
-	vertexes.push_back({ D3DXVECTOR3(mast_x, mast_y, -mast_z), D3DCOLOR_XRGB(49, 8, 18) });
+	vertexes.push_back({ D3DXVECTOR3(-mast_x, 0.0f, mast_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) });
+	vertexes.push_back({ D3DXVECTOR3(mast_x, 0.0f, mast_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) });
+	vertexes.push_back({ D3DXVECTOR3(-mast_x, mast_y, mast_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) });
+	vertexes.push_back({ D3DXVECTOR3(mast_x, mast_y, mast_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) });
+	vertexes.push_back({ D3DXVECTOR3(-mast_x, 0.0f, -mast_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) });
+	vertexes.push_back({ D3DXVECTOR3(mast_x, 0.0f, -mast_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) });
+	vertexes.push_back({ D3DXVECTOR3(-mast_x, mast_y, -mast_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) });
+	vertexes.push_back({ D3DXVECTOR3(mast_x, mast_y, -mast_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) });
 
 	// Create vertexes (Body)
 	//    11  12
 	// 9   10
-	vertexes.push_back({ D3DXVECTOR3(-body_x, body_y, -body_z), D3DCOLOR_XRGB(49, 8, 18) });
-	vertexes.push_back({ D3DXVECTOR3(body_x, body_y, -body_z), D3DCOLOR_XRGB(49, 8, 18) });
-	vertexes.push_back({ D3DXVECTOR3(-body_x, body_y, body_z), D3DCOLOR_XRGB(49, 8, 18) });
-	vertexes.push_back({ D3DXVECTOR3(body_x, body_y, body_z), D3DCOLOR_XRGB(49, 8, 18) });
+	vertexes.push_back({ D3DXVECTOR3(-body_x, body_y, -body_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) });
+	vertexes.push_back({ D3DXVECTOR3(body_x, body_y, -body_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) });
+	vertexes.push_back({ D3DXVECTOR3(-body_x, body_y, body_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) });
+	vertexes.push_back({ D3DXVECTOR3(body_x, body_y, body_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) });
 
 	// Create vertexes (Sail)
 	//    13  14
@@ -58,14 +58,14 @@ void RaftMesh::GenerateMesh()
 	//
 	// 17  18
 	//    19   20
-	vertexes.push_back({ D3DXVECTOR3(-sail_x, sail_y, sail_z), D3DCOLOR_XRGB(128, 128, 128) });
-	vertexes.push_back({ D3DXVECTOR3(sail_x, sail_y, sail_z), D3DCOLOR_XRGB(128, 128, 128) });
-	vertexes.push_back({ D3DXVECTOR3(-sail_x, sail_y - height_dist, sail_z - height_dist), D3DCOLOR_XRGB(128, 128, 128) });
-	vertexes.push_back({ D3DXVECTOR3(sail_x, sail_y - height_dist, sail_z - height_dist), D3DCOLOR_XRGB(128, 128, 128) });
-	vertexes.push_back({ D3DXVECTOR3(-sail_x, sail_y - 5 * height_dist, sail_z - height_dist), D3DCOLOR_XRGB(128, 128, 128) });
-	vertexes.push_back({ D3DXVECTOR3(sail_x, sail_y - 5 *height_dist, sail_z - height_dist), D3DCOLOR_XRGB(128, 128, 128) });
-	vertexes.push_back({ D3DXVECTOR3(-sail_x, sail_y - 6 * height_dist, sail_z), D3DCOLOR_XRGB(128, 128, 128) });
-	vertexes.push_back({ D3DXVECTOR3(sail_x, sail_y - 6 * height_dist, sail_z), D3DCOLOR_XRGB(128, 128, 128) });
+	vertexes.push_back({ D3DXVECTOR3(-sail_x, sail_y, sail_z), D3DCOLOR_XRGB(128, 128, 128) , D3DXVECTOR2(0,0) });
+	vertexes.push_back({ D3DXVECTOR3(sail_x, sail_y, sail_z), D3DCOLOR_XRGB(128, 128, 128) , D3DXVECTOR2(0,0) });
+	vertexes.push_back({ D3DXVECTOR3(-sail_x, sail_y - height_dist, sail_z - height_dist), D3DCOLOR_XRGB(128, 128, 128) , D3DXVECTOR2(0,0) });
+	vertexes.push_back({ D3DXVECTOR3(sail_x, sail_y - height_dist, sail_z - height_dist), D3DCOLOR_XRGB(128, 128, 128) , D3DXVECTOR2(0,0) });
+	vertexes.push_back({ D3DXVECTOR3(-sail_x, sail_y - 5 * height_dist, sail_z - height_dist), D3DCOLOR_XRGB(128, 128, 128) , D3DXVECTOR2(0,0) });
+	vertexes.push_back({ D3DXVECTOR3(sail_x, sail_y - 5 *height_dist, sail_z - height_dist), D3DCOLOR_XRGB(128, 128, 128) , D3DXVECTOR2(0,0) });
+	vertexes.push_back({ D3DXVECTOR3(-sail_x, sail_y - 6 * height_dist, sail_z), D3DCOLOR_XRGB(128, 128, 128) , D3DXVECTOR2(0,0) });
+	vertexes.push_back({ D3DXVECTOR3(sail_x, sail_y - 6 * height_dist, sail_z), D3DCOLOR_XRGB(128, 128, 128) , D3DXVECTOR2(0,0) });
 
 	// Create indexes (Mast)
 	// Front
