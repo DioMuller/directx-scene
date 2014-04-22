@@ -32,15 +32,15 @@ void CubeMesh::GenerateMesh()
 	// 1   2
 	//    7   8
 	// 3   4
-	vertexes.push_back({ D3DXVECTOR3(-norm_x, -norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18) });
-	vertexes.push_back({ D3DXVECTOR3(norm_x, -norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18) });
-	vertexes.push_back({ D3DXVECTOR3(-norm_x, norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18) });
-	vertexes.push_back({ D3DXVECTOR3(norm_x, norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18) });
+	vertexes.push_back({ D3DXVECTOR3(-norm_x, -norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) });
+	vertexes.push_back({ D3DXVECTOR3(norm_x, -norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) });
+	vertexes.push_back({ D3DXVECTOR3(-norm_x, norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) });
+	vertexes.push_back({ D3DXVECTOR3(norm_x, norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) });
 
-	vertexes.push_back({ D3DXVECTOR3(-norm_x, -norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18) });
-	vertexes.push_back({ D3DXVECTOR3(norm_x, -norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18) });
-	vertexes.push_back({ D3DXVECTOR3(-norm_x, norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18) });
-	vertexes.push_back({ D3DXVECTOR3(norm_x, norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18) });
+	vertexes.push_back({ D3DXVECTOR3(-norm_x, -norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) });
+	vertexes.push_back({ D3DXVECTOR3(norm_x, -norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) });
+	vertexes.push_back({ D3DXVECTOR3(-norm_x, norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) });
+	vertexes.push_back({ D3DXVECTOR3(norm_x, norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) });
 
 	// Create indexes
 
