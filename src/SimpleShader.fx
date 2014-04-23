@@ -9,6 +9,22 @@ uniform extern float Time;
 uniform extern float3 Source;
 uniform extern float4 MeshPosition;
 
+uniform extern texture Texture;
+
+////////////////////////////////////
+// Samplers
+////////////////////////////////////
+sampler TextureSampler = sampler_state
+{
+	Texture = <Texture>;
+	MinFilter = Anisotropic;
+	MagFilter = LINEAR;
+	MipFilter = LINEAR;
+	MaxAnisotropy = 8;
+	AddressU = WRAP;
+	AddressV = WRAP;
+};
+
 ////////////////////////////////////
 // Structs
 ////////////////////////////////////
@@ -17,6 +33,7 @@ struct OutputVS
 {
 	float4 posH : POSITION0;
 	float4 color : COLOR0;
+	float textureCoord : TEXCOORD0;
 };
 
 ////////////////////////////////////
@@ -56,7 +73,7 @@ float MeshMovement(float3 position)
 float4 GetIntensityFromHeight(float y)
 {
 	float c = y / a + 2;
-	return float4( c, c, c * 0.8, 1.0f);
+	return float4( c, c, c, 1.0f);
 }
 
 ////////////////////////////////////
@@ -128,6 +145,10 @@ float4 TerrainPS(OutputVS inVS) : COLOR
 	return inVS.color;
 }
 
+float4 TexturedPS(OutputVS inVS) : COLOR
+{
+	return float4(tex2D(TextureSampler, inVS.textureCoord).rgb, 1.0f);
+}
 ////////////////////////////////////
 // Techniques
 ////////////////////////////////////
@@ -170,5 +191,17 @@ technique WaveTech
 		SrcBlend = SrcAlpha;
 		DestBlend = InvSrcAlpha;
 		BlendOp = Add;
+	}
+}
+
+technique TexturedTech
+{
+	pass P0
+	{
+		// Shaders
+		vertexShader = compile vs_2_0 TransformVS();
+		pixelShader = compile ps_2_0 TexturedPS();
+		// Device States
+		FillMode = Solid;
 	}
 }

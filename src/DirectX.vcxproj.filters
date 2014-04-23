@@ -39,7 +39,7 @@
     <Filter Include="Rendering\Source">
       <UniqueIdentifier>{77762362-5525-426e-9a86-dd4f787f914d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resources">
+    <Filter Include="Assets">
       <UniqueIdentifier>{e861a5ad-eaa2-4286-b6eb-a8734db694ff}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -169,13 +169,5 @@
     <FxCompile Include="SimpleShader.fx">
       <Filter>Shaders</Filter>
     </FxCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="heightmap.raw">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="heightmap_2.raw">
-      <Filter>Resources</Filter>
-    </None>
   </ItemGroup>
 </Project>

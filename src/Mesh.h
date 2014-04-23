@@ -20,14 +20,17 @@ class Mesh
 		int triangleCount;
 		bool initialized;
 		std::string shaderTechnique;
+		std::wstring textureFile;
 
 		IDirect3DVertexBuffer9* vertexBuffer;
 		IDirect3DIndexBuffer9* indexBuffer;
+		IDirect3DTexture9* texture;
 
 	////////////////////////////////////
 	// Constructors
 	////////////////////////////////////
 	public:
+		Mesh(math::Vector3D position, std::string shaderTechnique, std::wstring textureFile);
 		Mesh(math::Vector3D position, std::string shaderTechnique);
 		~Mesh();
 

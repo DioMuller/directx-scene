@@ -2,7 +2,7 @@
 #include "mage/HandleError.h"
 
 
-CubeMesh::CubeMesh(math::Vector3D position, std::string shaderTechnique, float width, float height, float depth) : Mesh(position, shaderTechnique)
+CubeMesh::CubeMesh(math::Vector3D position, std::string shaderTechnique, float width, float height, float depth, std::wstring texture) : Mesh(position, shaderTechnique, texture)
 {
 	this->width = width;
 	this->height = height;
@@ -33,14 +33,14 @@ void CubeMesh::GenerateMesh()
 	//    7   8
 	// 3   4
 	vertexes.push_back({ D3DXVECTOR3(-norm_x, -norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) });
-	vertexes.push_back({ D3DXVECTOR3(norm_x, -norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) });
-	vertexes.push_back({ D3DXVECTOR3(-norm_x, norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) });
-	vertexes.push_back({ D3DXVECTOR3(norm_x, norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) });
+	vertexes.push_back({ D3DXVECTOR3(norm_x, -norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(1,0) });
+	vertexes.push_back({ D3DXVECTOR3(-norm_x, norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,1) });
+	vertexes.push_back({ D3DXVECTOR3(norm_x, norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(1,1) });
 
 	vertexes.push_back({ D3DXVECTOR3(-norm_x, -norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) });
-	vertexes.push_back({ D3DXVECTOR3(norm_x, -norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) });
-	vertexes.push_back({ D3DXVECTOR3(-norm_x, norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) });
-	vertexes.push_back({ D3DXVECTOR3(norm_x, norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) });
+	vertexes.push_back({ D3DXVECTOR3(norm_x, -norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(1,0) });
+	vertexes.push_back({ D3DXVECTOR3(-norm_x, norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,1) });
+	vertexes.push_back({ D3DXVECTOR3(norm_x, norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(1,1) });
 
 	// Create indexes
 

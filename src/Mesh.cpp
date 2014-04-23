@@ -1,17 +1,21 @@
 #include "Mesh.h"
 #include "mage/HandleError.h"
 
-Mesh::Mesh(math::Vector3D position, std::string shaderTechnique)
+Mesh::Mesh(math::Vector3D position, std::string shaderTechnique, std::wstring textureFile)
 {
 	this->position = position;
 	this->rotation = math::Vector3D(0.0f, 0.0f, 0.0f);
 	this->shaderTechnique = shaderTechnique;
+	this->textureFile = textureFile;
 }
+
+Mesh::Mesh(math::Vector3D position, std::string shaderTechnique) : Mesh(position, shaderTechnique, L"") {}
 
 Mesh::~Mesh()
 {
 	vertexBuffer->Release();
 	indexBuffer->Release();
+	if( texture != nullptr ) texture->Release();
 }
 
 void Mesh::Initialize(IDirect3DDevice9* device)
@@ -23,6 +27,16 @@ void Mesh::Initialize(IDirect3DDevice9* device)
 
 	// Create index buffer on the device.
 	HR(device->CreateIndexBuffer(sizeof(WORD)* indexCount, 0, D3DFMT_INDEX16, D3DPOOL_MANAGED, &indexBuffer, nullptr));
+
+	// Creates texture, if it exists.
+	if (textureFile != L"")
+	{
+		HR(D3DXCreateTextureFromFile(device, textureFile.c_str(), &texture));
+	}
+	else
+	{
+		texture = nullptr;
+	}
 
 	// Writes indexes on the video memory.
 	WORD* pWord;
@@ -59,6 +73,12 @@ void Mesh::Render(IDirect3DDevice9* device, ID3DXEffect* shader, int maxPasses)
 
 	D3DXHANDLE hWorld = shader->GetParameterByName(0, "World");
 	HR(shader->SetMatrix(hWorld, &world));
+
+	if (texture != nullptr)
+	{
+		D3DXHANDLE hTexture = shader->GetParameterByName(0, "Texture");
+		HR(shader->SetTexture(hTexture, texture));
+	}
 
 	UINT passes = 0;
 	HR(shader->Begin(&passes, 0));

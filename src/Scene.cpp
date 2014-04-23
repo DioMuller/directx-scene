@@ -33,7 +33,7 @@ void Scene::setup(IDirect3DDevice9* device)
 	float height = 300.0f;
 
 	// Generate meshes.
-	terrain = new TerrainMesh(math::Vector3D(0, 0, 0), "TerrainTech", "heightmap_2.raw", 1.0f, -85.0f, width * 2, height * 2, cols, rows, D3DCOLOR_XRGB(150, 150, 0));
+	terrain = new TerrainMesh(math::Vector3D(0, 0, 0), "TerrainTech", "assets/heightmap_2.raw", 1.0f, -85.0f, width * 2, height * 2, cols, rows, D3DCOLOR_XRGB(150, 150, 0));
 	terrain->Initialize(device);
 
 	plane = new PlaneMesh(math::Vector3D(0, 0, 0), "WaveTech", width, height, cols, rows, D3DCOLOR_XRGB(0, 0, 120));
@@ -42,10 +42,10 @@ void Scene::setup(IDirect3DDevice9* device)
 	raft = new RaftMesh(math::Vector3D(0, 0, 10), "TransformTech", 5.0f, 4.0f, 5.0f);
 	raft->Initialize(device);
 
-	boxes.push_back(new CubeMesh(math::Vector3D(0, 0, 0), "TransformTech", 1, 1, 1));
-	boxes.push_back(new CubeMesh(math::Vector3D(15, 0, -15), "TransformTech", 1, 1, 1));
-	boxes.push_back(new CubeMesh(math::Vector3D(25, 0, 5), "TransformTech", 1, 1, 1));
-	boxes.push_back(new CubeMesh(math::Vector3D(-35, 0, 5), "TransformTech", 1, 1, 1));
+	boxes.push_back(new CubeMesh(math::Vector3D(0, 0, 0), "TexturedTech", 1, 1, 1, L"assets/crate.png"));
+	boxes.push_back(new CubeMesh(math::Vector3D(15, 0, -15), "TexturedTech", 1, 1, 1, L"assets/crate.png"));
+	boxes.push_back(new CubeMesh(math::Vector3D(25, 0, 5), "TexturedTech", 1, 1, 1, L"assets/crate.png"));
+	boxes.push_back(new CubeMesh(math::Vector3D(-35, 0, 5), "TexturedTech", 1, 1, 1, L"assets/crate.png"));
 
 	for (CubeMesh* mesh : boxes)
 	{
