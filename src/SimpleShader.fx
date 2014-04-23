@@ -17,10 +17,9 @@ uniform extern texture Texture;
 sampler TextureSampler = sampler_state
 {
 	Texture = <Texture>;
-	MinFilter = Anisotropic;
+	MinFilter = LINEAR;
 	MagFilter = LINEAR;
 	MipFilter = LINEAR;
-	MaxAnisotropy = 8;
 	AddressU = WRAP;
 	AddressV = WRAP;
 };
