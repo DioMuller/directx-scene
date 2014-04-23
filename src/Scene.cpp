@@ -22,18 +22,19 @@ void Scene::setup(IDirect3DDevice9* device)
 	// Create camera.
 	camera = new Camera(60.0f, 1.0f, 500.0f, -20.0f, 5.0f);
 	cameraRotation = 0;
+	cameraHeight = 0;
 
 	// Raft rotation extra value.
 	rotationDiff = D3DXToRadian(-90);
 
 	/* TEST */
-	int cols = 256;
-	int rows = 256;
-	float width = 300.0f;
-	float height = 300.0f;
+	int cols = 128;
+	int rows = 128;
+	float width = 600.0f;
+	float height = 600.0f;
 
 	// Generate meshes.
-	terrain = new TerrainMesh(math::Vector3D(0, 0, 0), "TerrainTech", "assets/heightmap_2.raw", 1.0f, -85.0f, width * 2, height * 2, cols, rows, D3DCOLOR_XRGB(150, 150, 0));
+	terrain = new TerrainMesh(math::Vector3D(0, 0, 0), "TerrainTech", "assets/heightmap_2.raw", 1.0f, -87.0f, width, height, 256, 256, D3DCOLOR_XRGB(150, 150, 0));
 	terrain->Initialize(device);
 
 	plane = new PlaneMesh(math::Vector3D(0, 0, 0), "WaveTech", width, height, cols, rows, D3DCOLOR_XRGB(0, 0, 120));
@@ -80,12 +81,20 @@ void Scene::processEvent(const WindowsEvent& evt)
 			cameraRotation += 1;
 		if (evt.wParam == VK_LEFT)
 			cameraRotation -= 1;
+		if (evt.wParam == VK_UP)
+			cameraHeight = 1;
+		if (evt.wParam == VK_DOWN)
+			cameraHeight = -1;
 		break;
 	case WM_KEYUP:
 		if (evt.wParam == VK_RIGHT)
 			cameraRotation -= 1;
 		if (evt.wParam == VK_LEFT)
 			cameraRotation += 1;
+		if (evt.wParam == VK_UP)
+			cameraHeight = 0;
+		if (evt.wParam == VK_DOWN)
+			cameraHeight = 0;
 		break;
 		
 		return;
@@ -116,6 +125,7 @@ void Scene::paint(IDirect3DDevice9* device)
 	//--------------------------------------------------
 	camera->UpdateView(shader);
 	if (cameraRotation != 0) camera->Rotate(D3DXToRadian(cameraRotation));
+	if (cameraHeight != 0) camera->AddHeight(0.03f * (float)cameraHeight);
 
 	//--------------------------------------------------
 	// Rendering

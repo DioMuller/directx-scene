@@ -22,6 +22,7 @@ class Scene : public mage::AbstractGameLoop
 		// Camera
 		Camera* camera;
 		int cameraRotation;
+		int cameraHeight;
 
 		// Update helpers
 		float time;

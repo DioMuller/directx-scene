@@ -23,7 +23,7 @@ void TerrainMesh::GenerateVertexes(float initial_x, float diff_x, float initial_
 	{
 		for (int j = 0; j < rows; j++)
 		{
-			vertexes.push_back({ D3DXVECTOR3(initial_x + i * diff_x, heightmap(i, j), initial_z + j * diff_z), color, D3DXVECTOR2(0,0) });
+			vertexes.push_back({ D3DXVECTOR3(initial_x + (i * diff_x), heightmap(i, j), initial_z + (j * diff_z)), color, D3DXVECTOR2(0,0) });
 		}
 	}
 }

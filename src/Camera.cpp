@@ -68,3 +68,8 @@ void Camera::Rotate(float rad)
 	eye.x = cam_xz.x;
 	eye.z = cam_xz.y;
 }
+
+void Camera::AddHeight(float height)
+{
+	eye.y += height;
+}

@@ -46,7 +46,7 @@ static float a = 0.5f;
 static float k = 15.0f;
 
 // Angular frequency
-static float w = 2.0f;
+static float w = 1.0f;
 
 ////////////////////////////////////
 // Helper Functions

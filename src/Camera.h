@@ -30,5 +30,6 @@ class Camera
 	public:
 		void UpdateView(ID3DXEffect* shader);
 		void Rotate(float rad);
+		void AddHeight(float height);
 };
 
