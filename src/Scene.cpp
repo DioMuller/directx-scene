@@ -20,7 +20,7 @@ void Scene::setup(IDirect3DDevice9* device)
 	time = 0.0f;
 
 	// Create camera.
-	camera = new Camera(60.0f, 1.0f, 500.0f, -20.0f, 5.0f);
+	camera = new Camera(60.0f, 1.0f, 800.0f, -20.0f, 5.0f);
 	cameraRotation = 0;
 	cameraHeight = 0;
 

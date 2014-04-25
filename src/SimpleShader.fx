@@ -31,8 +31,8 @@ sampler TextureSampler = sampler_state
 struct OutputVS
 {
 	float4 posH : POSITION0;
-	float4 color : COLOR0;
 	float textureCoord : TEXCOORD0;
+	float4 color : COLOR0;
 };
 
 ////////////////////////////////////

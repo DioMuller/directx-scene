@@ -11,9 +11,9 @@ private:
 	static IDirect3DVertexDeclaration9* declaration;
 public:
 	D3DXVECTOR3 position;
-	D3DCOLOR color;
 	D3DXVECTOR2 texture;
-
+	D3DCOLOR color;
+	
 	static IDirect3DVertexDeclaration9* getDeclaration(IDirect3DDevice9* device);
 	static void releaseDeclaration();
 	static IDirect3DVertexBuffer9* createVertexBuffer(IDirect3DDevice9* device, const std::vector<Vertex>& vertices, D3DPOOL pool = D3DPOOL_MANAGED, DWORD usage = 0, HANDLE* pSharedHandle = nullptr);
