@@ -1,7 +1,7 @@
 #include "PlaneMesh.h"
 
 
-PlaneMesh::PlaneMesh(math::Vector3D position, std::string shaderTechnique, float width, float height, int columns, int rows, D3DCOLOR color) : Mesh(position, shaderTechnique)
+PlaneMesh::PlaneMesh(math::Vector3D position, std::string shaderTechnique, float width, float height, int columns, int rows, D3DCOLOR color, std::wstring texture) : Mesh(position, shaderTechnique, texture)
 {
 	this->width = width;
 	this->height = height;

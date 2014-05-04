@@ -72,4 +72,7 @@ void Camera::Rotate(float rad)
 void Camera::AddHeight(float height)
 {
 	eye.y += height;
+
+	if (eye.y > 300.0f) eye.y = 300.0f;
+	if (eye.y < 1.0f) eye.y = 1.0f;
 }

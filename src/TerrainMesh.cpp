@@ -3,8 +3,8 @@
 ////////////////////////////////////
 // Constructors
 ////////////////////////////////////
-TerrainMesh::TerrainMesh(math::Vector3D position, std::string shaderTechnique, std::string heightmap, float heightScale, float heightOffset, float width, float height, int columns, int rows, D3DCOLOR color, bool inverted)
-	: PlaneMesh(position, shaderTechnique, width, height, columns, rows, color)
+TerrainMesh::TerrainMesh(math::Vector3D position, std::string shaderTechnique, std::string heightmap, float heightScale, float heightOffset, float width, float height, int columns, int rows, D3DCOLOR color, bool inverted, std::wstring texture)
+	: PlaneMesh(position, shaderTechnique, width, height, columns, rows, color, texture)
 {
 	this->inverted = inverted;
 	this->heightmap.loadRAW(columns, rows, heightmap.c_str(), heightScale, heightOffset);
@@ -24,7 +24,7 @@ void TerrainMesh::GenerateVertexes(float initial_x, float diff_x, float initial_
 	{
 		for (int j = 0; j < rows; j++)
 		{
-			vertexes.push_back({ D3DXVECTOR3(initial_x + (i * diff_x), (inverted ? -1 : 1) * heightmap(i, j), initial_z + (j * diff_z)), color, D3DXVECTOR2(0,0) });
+			vertexes.push_back({ D3DXVECTOR3(initial_x + (i * diff_x), (inverted ? -1 : 1) * heightmap(i, j), initial_z + (j * diff_z)), color, D3DXVECTOR2(i%2,j%2) });
 		}
 	}
 }

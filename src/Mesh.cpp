@@ -76,7 +76,7 @@ void Mesh::Render(IDirect3DDevice9* device, ID3DXEffect* shader, int maxPasses)
 
 	if (texture != nullptr)
 	{
-		D3DXHANDLE hTexture = shader->GetParameterByName(0, "Texture");
+		D3DXHANDLE hTexture = shader->GetParameterByName(0, "CrateTexture");
 		HR(shader->SetTexture(hTexture, texture));
 	}
 

@@ -9,14 +9,14 @@ uniform extern float Time;
 uniform extern float3 Source;
 uniform extern float4 MeshPosition;
 
-uniform extern texture Texture;
+uniform extern texture CrateTexture;
 
 ////////////////////////////////////
 // Samplers
 ////////////////////////////////////
-sampler TextureSampler = sampler_state
+sampler CrateSampler = sampler_state
 {
-	Texture = <Texture>;
+	Texture = <CrateTexture>;
 	MinFilter = LINEAR;
 	MagFilter = LINEAR;
 	MipFilter = LINEAR;
@@ -78,7 +78,7 @@ float4 GetIntensityFromHeight(float y)
 ////////////////////////////////////
 // Vertex Shader
 ////////////////////////////////////
-OutputVS TransformVS(float3 posL : POSITION0, float4 color : COLOR0)
+OutputVS TransformVS(float3 posL : POSITION0, float2 texCoord : TEXCOORD0, float4 color : COLOR0)
 {
 	float4x4 wvp = mul(World, mul(View, Projection));
 
@@ -90,12 +90,13 @@ OutputVS TransformVS(float3 posL : POSITION0, float4 color : COLOR0)
 	// Transforma no espaço homogêneo
 	outVS.posH = mul(float4(posL, 1.0f), wvp);
 	outVS.color = color;
+	outVS.textureCoord = texCoord;
 
 	return outVS;
 }
 
 
-OutputVS WaveVS(float3 posL : POSITION0, float4 color : COLOR0)
+OutputVS WaveVS(float3 posL : POSITION0, float2 texCoord : TEXCOORD0, float4 color : COLOR0)
 {
 	OutputVS outVS = (OutputVS)0;
 	float4x4 wvp = mul(World, mul(View, Projection));
@@ -108,10 +109,12 @@ OutputVS WaveVS(float3 posL : POSITION0, float4 color : COLOR0)
 
 	//Transforma a posição
 	outVS.posH = mul(float4(posL, 1.0f), wvp);
+
+	outVS.textureCoord = texCoord;
 	return outVS;
 }
 
-OutputVS TerrainVS(float3 posL : POSITION0, float4 color : COLOR0)
+OutputVS TerrainVS(float3 posL : POSITION0, float2 texCoord : TEXCOORD0, float4 color : COLOR0)
 {
 	float4x4 wvp = mul(World, mul(View, Projection));
 
@@ -122,6 +125,8 @@ OutputVS TerrainVS(float3 posL : POSITION0, float4 color : COLOR0)
 
 	// Transforma no espaço homogêneo
 	outVS.posH = mul(float4(posL, 1.0f), wvp);
+
+	outVS.textureCoord = texCoord;
 
 	return outVS;
 }
@@ -146,7 +151,7 @@ float4 TerrainPS(OutputVS inVS) : COLOR
 
 float4 TexturedPS(OutputVS inVS) : COLOR
 {
-	return float4(tex2D(TextureSampler, inVS.textureCoord).rgb, 1.0f);
+	return tex2D(CrateSampler, inVS.textureCoord);
 }
 ////////////////////////////////////
 // Techniques
