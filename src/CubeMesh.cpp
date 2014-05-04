@@ -21,78 +21,95 @@ void CubeMesh::GenerateMesh()
 	float norm_y = (height / 2);
 	float norm_z = (depth / 2);
 
-	// Vertex count
-	vertexCount = 8;
+	// Front Face
+	vertexes.push_back({ D3DXVECTOR3(-norm_x, -norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 1.0f) });
+	vertexes.push_back({ D3DXVECTOR3(-norm_x,  norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 0.0f) });
+	vertexes.push_back({ D3DXVECTOR3( norm_x,  norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 0.0f) });
+	vertexes.push_back({ D3DXVECTOR3( norm_x, -norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 1.0f) });
 
-	// Triangle count
-	triangleCount = 12;
+	// Back Face
+	vertexes.push_back({ D3DXVECTOR3(-norm_x, -norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 1.0f) });
+	vertexes.push_back({ D3DXVECTOR3( norm_x, -norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 1.0f) });
+	vertexes.push_back({ D3DXVECTOR3( norm_x,  norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 0.0f) });
+	vertexes.push_back({ D3DXVECTOR3(-norm_x,  norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 0.0f) });
 
-	// Create vertexes
-	//    5   6
-	// 1   2
-	//    7   8
-	// 3   4
-	vertexes.push_back({ D3DXVECTOR3(-norm_x, -norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) });
-	vertexes.push_back({ D3DXVECTOR3(norm_x, -norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(1,0) });
-	vertexes.push_back({ D3DXVECTOR3(-norm_x, norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,1) });
-	vertexes.push_back({ D3DXVECTOR3(norm_x, norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(1,1) });
+	// Top
+	vertexes.push_back({ D3DXVECTOR3(-norm_x, norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 1.0f) });
+	vertexes.push_back({ D3DXVECTOR3(-norm_x, norm_y,  norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 0.0f) });
+	vertexes.push_back({ D3DXVECTOR3( norm_x, norm_y,  norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 0.0f) });
+	vertexes.push_back({ D3DXVECTOR3( norm_x, norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 1.0f) });
 
-	vertexes.push_back({ D3DXVECTOR3(-norm_x, -norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(1,0) });
-	vertexes.push_back({ D3DXVECTOR3(norm_x, -norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) });
-	vertexes.push_back({ D3DXVECTOR3(-norm_x, norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(1,1) });
-	vertexes.push_back({ D3DXVECTOR3(norm_x, norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,1) });
-	
+	// Bottom
+	vertexes.push_back({ D3DXVECTOR3(-norm_x, -norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 1.0f) });
+	vertexes.push_back({ D3DXVECTOR3( norm_x, -norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 1.0f) });
+	vertexes.push_back({ D3DXVECTOR3( norm_x, -norm_y,  norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 0.0f) });
+	vertexes.push_back({ D3DXVECTOR3(-norm_x, -norm_y,  norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 0.0f) });
+
+	//Left
+	vertexes.push_back({ D3DXVECTOR3(-norm_x, -norm_y,  norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 1.0f) });
+	vertexes.push_back({ D3DXVECTOR3(-norm_x,  norm_y,  norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 0.0f) });
+	vertexes.push_back({ D3DXVECTOR3(-norm_x,  norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 0.0f) });
+	vertexes.push_back({ D3DXVECTOR3(-norm_x, -norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 1.0f) });
+
+	//Right
+	vertexes.push_back({ D3DXVECTOR3(norm_x, -norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 1.0f) });
+	vertexes.push_back({ D3DXVECTOR3(norm_x,  norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 0.0f) });
+	vertexes.push_back({ D3DXVECTOR3(norm_x,  norm_y,  norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 0.0f) });
+	vertexes.push_back({ D3DXVECTOR3(norm_x, -norm_y,  norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 1.0f) });
+
 	// Create indexes
 
 	// Front
 	indexes.push_back(0);
 	indexes.push_back(1);
 	indexes.push_back(2);
+	indexes.push_back(0);
 	indexes.push_back(2);
-	indexes.push_back(1);
 	indexes.push_back(3);
-
-	// Right
-	indexes.push_back(1);
-	indexes.push_back(5);
-	indexes.push_back(3);
-	indexes.push_back(3);
-	indexes.push_back(5);
-	indexes.push_back(7);
 
 	// Back
-	indexes.push_back(5);
 	indexes.push_back(4);
+	indexes.push_back(5);
+	indexes.push_back(6);
+	indexes.push_back(4);
+	indexes.push_back(6);
 	indexes.push_back(7);
-	indexes.push_back(7);
-	indexes.push_back(4);
-	indexes.push_back(6);
-
-	// Left
-	indexes.push_back(4);
-	indexes.push_back(0);
-	indexes.push_back(6);
-	indexes.push_back(6);
-	indexes.push_back(0);
-	indexes.push_back(2);
-
-	// Bottom
-	indexes.push_back(4);
-	indexes.push_back(5);
-	indexes.push_back(0);
-	indexes.push_back(0);
-	indexes.push_back(5);
-	indexes.push_back(1);
 
 	// Top
-	indexes.push_back(2);
-	indexes.push_back(3);
-	indexes.push_back(6);
-	indexes.push_back(6);
-	indexes.push_back(3);
-	indexes.push_back(7);
+	indexes.push_back(8);
+	indexes.push_back(9);
+	indexes.push_back(10);
+	indexes.push_back(8);
+	indexes.push_back(10);
+	indexes.push_back(11);
+
+	// Bottom
+	indexes.push_back(12);
+	indexes.push_back(13);
+	indexes.push_back(14);
+	indexes.push_back(12);
+	indexes.push_back(14);
+	indexes.push_back(15);
+
+	// Left
+	indexes.push_back(16);
+	indexes.push_back(17);
+	indexes.push_back(18);
+	indexes.push_back(16);
+	indexes.push_back(18);
+	indexes.push_back(19);
+
+	// Top
+	indexes.push_back(20);
+	indexes.push_back(21);
+	indexes.push_back(22);
+	indexes.push_back(20);
+	indexes.push_back(22);
+	indexes.push_back(23);
 
 	indexCount = indexes.size();
+	triangleCount = indexes.size() / 3;
+	vertexCount = vertexes.size();
 
 }
 

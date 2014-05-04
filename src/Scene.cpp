@@ -43,7 +43,7 @@ void Scene::setup(IDirect3DDevice9* device)
 	raft = new RaftMesh(math::Vector3D(0, 0, 10), "TransformTech", 5.0f, 4.0f, 5.0f);
 	raft->Initialize(device);
 
-	boxes.push_back(new CubeMesh(math::Vector3D(0, 0, 0), "TexturedTech", 1, 1, 1, L"assets/crate.png"));
+	boxes.push_back(new CubeMesh(math::Vector3D(0, 0, 0), "TexturedTech", 10, 10, 10, L"assets/crate.png"));
 	boxes.push_back(new CubeMesh(math::Vector3D(15, 0, -15), "TexturedTech", 1, 1, 1, L"assets/crate.png"));
 	boxes.push_back(new CubeMesh(math::Vector3D(25, 0, 5), "TexturedTech", 1, 1, 1, L"assets/crate.png"));
 	boxes.push_back(new CubeMesh(math::Vector3D(-35, 0, 5), "TexturedTech", 1, 1, 1, L"assets/crate.png"));

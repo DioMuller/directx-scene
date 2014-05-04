@@ -20,11 +20,12 @@ TerrainMesh::~TerrainMesh()
 ////////////////////////////////////
 void TerrainMesh::GenerateVertexes(float initial_x, float diff_x, float initial_z, float diff_z)
 {
+	float scale = 0.001f;
 	for (int i = 0; i < columns; i++)
 	{
 		for (int j = 0; j < rows; j++)
 		{
-			vertexes.push_back({ D3DXVECTOR3(initial_x + (i * diff_x), (inverted ? -1 : 1) * heightmap(i, j), initial_z + (j * diff_z)), color, D3DXVECTOR2(i%2,j%2) });
+			vertexes.push_back({ D3DXVECTOR3(initial_x + (i * diff_x), (inverted ? -1 : 1) * heightmap(i, j), initial_z + (j * diff_z)), color, D3DXVECTOR2((float)i, (float) j) * scale });
 		}
 	}
 }

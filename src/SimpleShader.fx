@@ -146,12 +146,12 @@ float4 WavePS(OutputVS inVS) : COLOR
 
 float4 TerrainPS(OutputVS inVS) : COLOR
 {
-	return tex2D(TextureSampler, inVS.textureCoord);
+	return float4(tex2D(TextureSampler, inVS.textureCoord).rgb, 1.0f);
 }
 
 float4 TexturedPS(OutputVS inVS) : COLOR
 {
-	return tex2D(TextureSampler, inVS.textureCoord);
+	return float4(tex2D(TextureSampler, inVS.textureCoord).rgb, 1.0f);
 }
 ////////////////////////////////////
 // Techniques
