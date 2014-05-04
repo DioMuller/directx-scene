@@ -9,14 +9,14 @@ uniform extern float Time;
 uniform extern float3 Source;
 uniform extern float4 MeshPosition;
 
-uniform extern texture CrateTexture;
+uniform extern texture Texture;
 
 ////////////////////////////////////
 // Samplers
 ////////////////////////////////////
-sampler CrateSampler = sampler_state
+sampler TextureSampler = sampler_state
 {
-	Texture = <CrateTexture>;
+	Texture = <Texture>;
 	MinFilter = LINEAR;
 	MagFilter = LINEAR;
 	MipFilter = LINEAR;
@@ -146,12 +146,12 @@ float4 WavePS(OutputVS inVS) : COLOR
 
 float4 TerrainPS(OutputVS inVS) : COLOR
 {
-	return inVS.color;
+	return tex2D(TextureSampler, inVS.textureCoord);
 }
 
 float4 TexturedPS(OutputVS inVS) : COLOR
 {
-	return tex2D(CrateSampler, inVS.textureCoord);
+	return tex2D(TextureSampler, inVS.textureCoord);
 }
 ////////////////////////////////////
 // Techniques
