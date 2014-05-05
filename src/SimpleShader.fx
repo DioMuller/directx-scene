@@ -153,6 +153,7 @@ float4 TexturedPS(OutputVS inVS) : COLOR
 {
 	return float4(tex2D(TextureSampler, inVS.textureCoord).rgb, 1.0f);
 }
+
 ////////////////////////////////////
 // Techniques
 ////////////////////////////////////
