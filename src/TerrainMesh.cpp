@@ -20,7 +20,7 @@ TerrainMesh::~TerrainMesh()
 ////////////////////////////////////
 void TerrainMesh::GenerateVertexes(float initial_x, float diff_x, float initial_z, float diff_z)
 {
-	float scale = 0.01f;
+	float scale = 0.1f;
 	for (int i = 0; i < columns; i++)
 	{
 		for (int j = 0; j < rows; j++)
