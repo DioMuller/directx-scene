@@ -22,40 +22,40 @@ void CubeMesh::GenerateMesh()
 	float norm_z = (depth / 2);
 
 	// Front Face
-	vertexes.push_back({ D3DXVECTOR3(-norm_x, -norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 1.0f) });
-	vertexes.push_back({ D3DXVECTOR3(-norm_x,  norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 0.0f) });
-	vertexes.push_back({ D3DXVECTOR3( norm_x,  norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 0.0f) });
-	vertexes.push_back({ D3DXVECTOR3( norm_x, -norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 1.0f) });
+	vertexes.push_back(Vertex(D3DXVECTOR3(-norm_x, -norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 1.0f) ));
+	vertexes.push_back(Vertex(D3DXVECTOR3(-norm_x,  norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 0.0f) ));
+	vertexes.push_back(Vertex(D3DXVECTOR3( norm_x,  norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 0.0f) ));
+	vertexes.push_back(Vertex(D3DXVECTOR3( norm_x, -norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 1.0f) ));
 
 	// Back Face
-	vertexes.push_back({ D3DXVECTOR3(-norm_x, -norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 1.0f) });
-	vertexes.push_back({ D3DXVECTOR3( norm_x, -norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 1.0f) });
-	vertexes.push_back({ D3DXVECTOR3( norm_x,  norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 0.0f) });
-	vertexes.push_back({ D3DXVECTOR3(-norm_x,  norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 0.0f) });
+	vertexes.push_back(Vertex(D3DXVECTOR3(-norm_x, -norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 1.0f) ));
+	vertexes.push_back(Vertex(D3DXVECTOR3( norm_x, -norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 1.0f) ));
+	vertexes.push_back(Vertex(D3DXVECTOR3( norm_x,  norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 0.0f) ));
+	vertexes.push_back(Vertex(D3DXVECTOR3(-norm_x,  norm_y, norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 0.0f) ));
 
 	// Top
-	vertexes.push_back({ D3DXVECTOR3(-norm_x, norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 1.0f) });
-	vertexes.push_back({ D3DXVECTOR3(-norm_x, norm_y,  norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 0.0f) });
-	vertexes.push_back({ D3DXVECTOR3( norm_x, norm_y,  norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 0.0f) });
-	vertexes.push_back({ D3DXVECTOR3( norm_x, norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 1.0f) });
+	vertexes.push_back(Vertex(D3DXVECTOR3(-norm_x, norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 1.0f) ));
+	vertexes.push_back(Vertex(D3DXVECTOR3(-norm_x, norm_y,  norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 0.0f) ));
+	vertexes.push_back(Vertex(D3DXVECTOR3( norm_x, norm_y,  norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 0.0f) ));
+	vertexes.push_back(Vertex(D3DXVECTOR3( norm_x, norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 1.0f) ));
 
 	// Bottom
-	vertexes.push_back({ D3DXVECTOR3(-norm_x, -norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 1.0f) });
-	vertexes.push_back({ D3DXVECTOR3( norm_x, -norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 1.0f) });
-	vertexes.push_back({ D3DXVECTOR3( norm_x, -norm_y,  norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 0.0f) });
-	vertexes.push_back({ D3DXVECTOR3(-norm_x, -norm_y,  norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 0.0f) });
+	vertexes.push_back(Vertex(D3DXVECTOR3(-norm_x, -norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 1.0f) ));
+	vertexes.push_back(Vertex(D3DXVECTOR3( norm_x, -norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 1.0f) ));
+	vertexes.push_back(Vertex(D3DXVECTOR3( norm_x, -norm_y,  norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 0.0f) ));
+	vertexes.push_back(Vertex(D3DXVECTOR3(-norm_x, -norm_y,  norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 0.0f) ));
 
 	//Left
-	vertexes.push_back({ D3DXVECTOR3(-norm_x, -norm_y,  norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 1.0f) });
-	vertexes.push_back({ D3DXVECTOR3(-norm_x,  norm_y,  norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 0.0f) });
-	vertexes.push_back({ D3DXVECTOR3(-norm_x,  norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 0.0f) });
-	vertexes.push_back({ D3DXVECTOR3(-norm_x, -norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 1.0f) });
+	vertexes.push_back(Vertex(D3DXVECTOR3(-norm_x, -norm_y,  norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 1.0f) ));
+	vertexes.push_back(Vertex(D3DXVECTOR3(-norm_x,  norm_y,  norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 0.0f) ));
+	vertexes.push_back(Vertex(D3DXVECTOR3(-norm_x,  norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 0.0f) ));
+	vertexes.push_back(Vertex(D3DXVECTOR3(-norm_x, -norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 1.0f) ));
 
 	//Right
-	vertexes.push_back({ D3DXVECTOR3(norm_x, -norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 1.0f) });
-	vertexes.push_back({ D3DXVECTOR3(norm_x,  norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 0.0f) });
-	vertexes.push_back({ D3DXVECTOR3(norm_x,  norm_y,  norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 0.0f) });
-	vertexes.push_back({ D3DXVECTOR3(norm_x, -norm_y,  norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 1.0f) });
+	vertexes.push_back(Vertex(D3DXVECTOR3(norm_x, -norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 1.0f) ));
+	vertexes.push_back(Vertex(D3DXVECTOR3(norm_x,  norm_y, -norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 0.0f, 0.0f) ));
+	vertexes.push_back(Vertex(D3DXVECTOR3(norm_x,  norm_y,  norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 0.0f) ));
+	vertexes.push_back(Vertex(D3DXVECTOR3(norm_x, -norm_y,  norm_z), D3DCOLOR_XRGB(49, 8, 18), D3DXVECTOR2( 1.0f, 1.0f) ));
 
 	// Create indexes
 

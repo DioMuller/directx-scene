@@ -9,7 +9,13 @@ Mesh::Mesh(math::Vector3D position, std::string shaderTechnique, std::wstring te
 	this->textureFile = textureFile;
 }
 
-Mesh::Mesh(math::Vector3D position, std::string shaderTechnique) : Mesh(position, shaderTechnique, L"") {}
+Mesh::Mesh(math::Vector3D position, std::string shaderTechnique)
+{
+	this->position = position;
+	this->rotation = math::Vector3D(0.0f, 0.0f, 0.0f);
+	this->shaderTechnique = shaderTechnique;
+	this->textureFile = L"";
+}
 
 Mesh::~Mesh()
 {
