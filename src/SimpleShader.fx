@@ -95,6 +95,22 @@ OutputVS TransformVS(float3 posL : POSITION0, float2 texCoord : TEXCOORD0, float
 	return outVS;
 }
 
+OutputVS TexturedVS(float3 posL : POSITION0, float2 texCoord : TEXCOORD0, float4 color : COLOR0)
+{
+	float4x4 wvp = mul(World, mul(View, Projection));
+
+		// Zera nossa saída
+		OutputVS outVS = (OutputVS)0;
+
+	posL.y = posL.y + MeshMovement(posL) + 0.2;
+
+	// Transforma no espaço homogêneo
+	outVS.posH = mul(float4(posL, 1.0f), wvp);
+	outVS.color = color;
+	outVS.textureCoord = texCoord;
+
+	return outVS;
+}
 
 OutputVS WaveVS(float3 posL : POSITION0, float2 texCoord : TEXCOORD0, float4 color : COLOR0)
 {
@@ -204,7 +220,7 @@ technique TexturedTech
 	pass P0
 	{
 		// Shaders
-		vertexShader = compile vs_2_0 TransformVS();
+		vertexShader = compile vs_2_0 TexturedVS();
 		pixelShader = compile ps_2_0 TexturedPS();
 		// Device States
 		FillMode = Solid;

@@ -6,11 +6,25 @@ RaftMesh::RaftMesh(math::Vector3D position, std::string shaderTechnique, float w
 	this->width = width;
 	this->height = height;
 	this->depth = depth;
+
+	body = new CubeMesh(position, "TexturedTech", width, 0.1f * height, depth, L"assets/boards.png");
+	mast = new CubeMesh(position, "TexturedTech", width * 0.1f, height, depth * 0.1f, L"assets/boards.png");
+	mast->position.addY(height / 2.0f);
 }
 
 
 RaftMesh::~RaftMesh()
 {
+	delete body;
+	delete mast;
+}
+
+void RaftMesh::Initialize(IDirect3DDevice9* device)
+{
+	Mesh::Initialize(device);
+
+	body->Initialize(device);
+	mast->Initialize(device);
 }
 
 void RaftMesh::GenerateMesh()
@@ -30,28 +44,6 @@ void RaftMesh::GenerateMesh()
 
 	float height_dist = height/8.0f;
 
-	// Create vertexes (Mast)
-	//    5   6
-	// 1   2
-	//    7   8
-	// 3   4
-	vertexes.push_back(Vertex(D3DXVECTOR3(-mast_x, 0.0f, mast_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) ));
-	vertexes.push_back(Vertex(D3DXVECTOR3(mast_x, 0.0f, mast_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) ));
-	vertexes.push_back(Vertex(D3DXVECTOR3(-mast_x, mast_y, mast_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) ));
-	vertexes.push_back(Vertex(D3DXVECTOR3(mast_x, mast_y, mast_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) ));
-	vertexes.push_back(Vertex(D3DXVECTOR3(-mast_x, 0.0f, -mast_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) ));
-	vertexes.push_back(Vertex(D3DXVECTOR3(mast_x, 0.0f, -mast_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) ));
-	vertexes.push_back(Vertex(D3DXVECTOR3(-mast_x, mast_y, -mast_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) ));
-	vertexes.push_back(Vertex(D3DXVECTOR3(mast_x, mast_y, -mast_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) ));
-
-	// Create vertexes (Body)
-	//    11  12
-	// 9   10
-	vertexes.push_back(Vertex(D3DXVECTOR3(-body_x, body_y, -body_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) ));
-	vertexes.push_back(Vertex(D3DXVECTOR3(body_x, body_y, -body_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) ));
-	vertexes.push_back(Vertex(D3DXVECTOR3(-body_x, body_y, body_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) ));
-	vertexes.push_back(Vertex(D3DXVECTOR3(body_x, body_y, body_z), D3DCOLOR_XRGB(49, 8, 18) , D3DXVECTOR2(0,0) ));
-
 	// Create vertexes (Sail)
 	//    13  14
 	// 15   16
@@ -67,83 +59,32 @@ void RaftMesh::GenerateMesh()
 	vertexes.push_back(Vertex(D3DXVECTOR3(-sail_x, sail_y - 6 * height_dist, sail_z), D3DCOLOR_XRGB(128, 128, 128) , D3DXVECTOR2(0,0) ));
 	vertexes.push_back(Vertex(D3DXVECTOR3(sail_x, sail_y - 6 * height_dist, sail_z), D3DCOLOR_XRGB(128, 128, 128) , D3DXVECTOR2(0,0) ));
 
-	// Create indexes (Mast)
-	// Front
-	indexes.push_back(0);
-	indexes.push_back(1);
-	indexes.push_back(2);
-	indexes.push_back(2);
-	indexes.push_back(1);
-	indexes.push_back(3);
-
-	// Right
-	indexes.push_back(1);
-	indexes.push_back(5);
-	indexes.push_back(3);
-	indexes.push_back(3);
-	indexes.push_back(5);
-	indexes.push_back(7);
-
-	// Back
-	indexes.push_back(5);
-	indexes.push_back(4);
-	indexes.push_back(7);
-	indexes.push_back(7);
-	indexes.push_back(4);
-	indexes.push_back(6);
-
-	// Left
-	indexes.push_back(4);
-	indexes.push_back(0);
-	indexes.push_back(6);
-	indexes.push_back(6);
-	indexes.push_back(0);
-	indexes.push_back(2);
-
-	// Top
-	indexes.push_back(2);
-	indexes.push_back(3);
-	indexes.push_back(6);
-	indexes.push_back(6);
-	indexes.push_back(3);
-	indexes.push_back(7);
-
-	// Indexes (Body)
-	//    11  12
-	// 9   10
-	indexes.push_back(10);
-	indexes.push_back(11);
-	indexes.push_back(8);
-	indexes.push_back(8);
-	indexes.push_back(11);
-	indexes.push_back(9);
-
 	// Indexes (Sail)
 	//    13  14
 	// 15   16
 	//
 	// 17  18
 	//    19   20
-	indexes.push_back(12);
-	indexes.push_back(13);
-	indexes.push_back(14);
-	indexes.push_back(14);
-	indexes.push_back(13);
-	indexes.push_back(15);
+	indexes.push_back(0);
+	indexes.push_back(1);
+	indexes.push_back(2);
+	indexes.push_back(2);
+	indexes.push_back(1);
+	indexes.push_back(3);
 
-	indexes.push_back(14);
-	indexes.push_back(15);
-	indexes.push_back(16);
-	indexes.push_back(16);
-	indexes.push_back(15);
-	indexes.push_back(17);
+	indexes.push_back(2);
+	indexes.push_back(3);
+	indexes.push_back(4);
+	indexes.push_back(4);
+	indexes.push_back(3);
+	indexes.push_back(5);
 
-	indexes.push_back(16);
-	indexes.push_back(17);
-	indexes.push_back(18);
-	indexes.push_back(18);
-	indexes.push_back(17);
-	indexes.push_back(19);
+	indexes.push_back(4);
+	indexes.push_back(5);
+	indexes.push_back(6);
+	indexes.push_back(6);
+	indexes.push_back(5);
+	indexes.push_back(7);
 
 	indexCount = indexes.size();
 	triangleCount = indexCount / 3;
@@ -153,6 +94,18 @@ void RaftMesh::GenerateMesh()
 
 void RaftMesh::Render(IDirect3DDevice9* device, ID3DXEffect* shader, int maxPasses)
 {
+	// TODO: Add Update() method for that?
+	body->position = position;
+	body->rotation = rotation;
+
+	mast->position.x = position.x;
+	mast->position.z = position.z;
+	mast->rotation = rotation;
+	// END
+
+	body->Render(device, shader, maxPasses);
+	mast->Render(device, shader, maxPasses);
+
 	D3DXVECTOR4 pos = D3DXVECTOR4(position.x, position.y, position.z, 0);
 	D3DXHANDLE hPosition = shader->GetParameterByName(0, "MeshPosition");
 	HR(shader->SetVector(hPosition, &pos));

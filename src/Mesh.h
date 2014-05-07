@@ -38,7 +38,7 @@ class Mesh
 	// Methods
 	////////////////////////////////////
 	public:
-		void Initialize(IDirect3DDevice9* device);
+		virtual void Initialize(IDirect3DDevice9* device);
 		virtual void GenerateMesh();
 		virtual void Render(IDirect3DDevice9* device, ID3DXEffect* shader, int maxPasses = INT_MAX);
 };

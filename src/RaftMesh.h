@@ -1,5 +1,7 @@
 #pragma once
 #include "Mesh.h"
+#include "CubeMesh.h"
+
 class RaftMesh : public Mesh
 {
 	////////////////////////////////////
@@ -9,6 +11,8 @@ class RaftMesh : public Mesh
 		float width;
 		float height;
 		float depth;
+		CubeMesh* mast;
+		CubeMesh* body;
 
 	////////////////////////////////////
 	// Constructors
@@ -21,6 +25,7 @@ class RaftMesh : public Mesh
 	// Methods
 	////////////////////////////////////
 	public:
+		void Initialize(IDirect3DDevice9* device);
 		void GenerateMesh();
 		void Render(IDirect3DDevice9* device, ID3DXEffect* shader, int maxPasses = INT_MAX);
 };
