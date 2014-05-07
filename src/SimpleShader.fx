@@ -147,6 +147,23 @@ OutputVS TerrainVS(float3 posL : POSITION0, float2 texCoord : TEXCOORD0, float4 
 	return outVS;
 }
 
+OutputVS SimpleVS(float3 posL : POSITION0, float2 texCoord : TEXCOORD0, float4 color : COLOR0)
+{
+	float4x4 wvp = mul(World, mul(View, Projection));
+
+	// Zera nossa saída
+	OutputVS outVS = (OutputVS)0;
+
+	outVS.color = color;
+
+	// Transforma no espaço homogêneo
+	outVS.posH = mul(float4(posL, 1.0f), wvp);
+
+	outVS.textureCoord = texCoord;
+
+	return outVS;
+}
+
 ////////////////////////////////////
 // Pixel Shader
 ////////////////////////////////////
@@ -221,6 +238,18 @@ technique TexturedTech
 	{
 		// Shaders
 		vertexShader = compile vs_2_0 TexturedVS();
+		pixelShader = compile ps_2_0 TexturedPS();
+		// Device States
+		FillMode = Solid;
+	}
+}
+
+technique FixedTech
+{
+	pass P0
+	{
+		// Shaders
+		vertexShader = compile vs_2_0 SimpleVS();
 		pixelShader = compile ps_2_0 TexturedPS();
 		// Device States
 		FillMode = Solid;

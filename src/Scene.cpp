@@ -53,7 +53,7 @@ void Scene::setup(IDirect3DDevice9* device)
 		mesh->Initialize(device);
 	}
 
-	dam = new CubeMesh(math::Vector3D(-250, -10, 10), "TexturedTech", 5, 60, 100, L"assets/wall.png");
+	dam = new CubeMesh(math::Vector3D(-250, -10, 10), "FixedTech", 5, 60, 100, L"assets/wall.png");
 	dam->Initialize(device);
 
 	// Shader
