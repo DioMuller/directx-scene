@@ -47,6 +47,8 @@ static float k = 15.0f;
 // Angular frequency
 static float w = 1.0f;
 
+static float skyspeed = 0.1f;
+
 ////////////////////////////////////
 // Helper Functions
 ////////////////////////////////////
@@ -164,6 +166,23 @@ OutputVS SimpleVS(float3 posL : POSITION0, float2 texCoord : TEXCOORD0, float4 c
 	return outVS;
 }
 
+OutputVS SkyVS(float3 posL : POSITION0, float2 texCoord : TEXCOORD0, float4 color : COLOR0)
+{
+	float4x4 wvp = mul(World, mul(View, Projection));
+
+	// Zera nossa saída
+	OutputVS outVS = (OutputVS)0;
+
+	outVS.color = color;
+
+	// Transforma no espaço homogêneo
+	outVS.posH = mul(float4(posL, 1.0f), wvp);
+
+	outVS.textureCoord = float2(texCoord.x + Time * skyspeed, texCoord.y);
+
+	return outVS;
+}
+
 ////////////////////////////////////
 // Pixel Shader
 ////////////////////////////////////
@@ -250,6 +269,18 @@ technique FixedTech
 	{
 		// Shaders
 		vertexShader = compile vs_2_0 SimpleVS();
+		pixelShader = compile ps_2_0 TexturedPS();
+		// Device States
+		FillMode = Solid;
+	}
+}
+
+technique SkyTech
+{
+	pass P0
+	{
+		// Shaders
+		vertexShader = compile vs_2_0 SkyVS();
 		pixelShader = compile ps_2_0 TexturedPS();
 		// Device States
 		FillMode = Solid;
