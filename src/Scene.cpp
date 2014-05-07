@@ -53,6 +53,9 @@ void Scene::setup(IDirect3DDevice9* device)
 		mesh->Initialize(device);
 	}
 
+	dam = new CubeMesh(math::Vector3D(-250, -10, 10), "TexturedTech", 5, 60, 100, L"assets/wall.png");
+	dam->Initialize(device);
+
 	// Shader
 	ID3DXBuffer* errors = 0;
 	HR(D3DXCreateEffectFromFile(device, _T("SimpleShader.fx"), 0, 0, D3DXSHADER_DEBUG, 0, &shader, &errors));
@@ -141,6 +144,8 @@ void Scene::paint(IDirect3DDevice9* device)
 	{
 		mesh->Render(device, shader);
 	}
+
+	dam->Render(device, shader);
 
 	plane->Render(device, shader);
 

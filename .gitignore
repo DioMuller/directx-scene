@@ -30,3 +30,5 @@
 /src/*.opensdf
 /src/Debug
 /src/Release
+
+/src/_ReSharper.DirectX

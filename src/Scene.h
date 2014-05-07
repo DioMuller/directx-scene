@@ -18,6 +18,7 @@ class Scene : public mage::AbstractGameLoop
 		TerrainMesh* terrain;
 		RaftMesh* raft;
 		std::vector<CubeMesh*> boxes;
+		CubeMesh* dam;
 
 		// Camera
 		Camera* camera;
