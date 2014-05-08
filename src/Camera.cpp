@@ -76,3 +76,8 @@ void Camera::AddHeight(float height)
 	if (eye.y > 300.0f) eye.y = 300.0f;
 	if (eye.y < 1.0f) eye.y = 1.0f;
 }
+
+D3DXVECTOR4 Camera::GetEyePostition()
+{
+	return D3DXVECTOR4(eye.x, eye.y, eye.z, 0);
+}

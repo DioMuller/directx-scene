@@ -147,6 +147,7 @@ void Scene::paint(IDirect3DDevice9* device)
 	if (cameraRotation != 0) camera->Rotate(D3DXToRadian(cameraRotation));
 	if (cameraHeight != 0) camera->AddHeight(0.03f * (float)cameraHeight);
 
+
 	//--------------------------------------------------
 	// Rendering
 	//--------------------------------------------------

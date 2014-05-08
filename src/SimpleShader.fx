@@ -184,6 +184,7 @@ OutputVS SkyVS(float3 posL : POSITION0, float2 texCoord : TEXCOORD0, float4 colo
 	return outVS;
 }
 
+
 ////////////////////////////////////
 // Pixel Shader
 ////////////////////////////////////
@@ -297,7 +298,8 @@ technique CharacterTech
 		// Device States
 		FillMode = Solid;
 		AlphaTestEnable = true;
-		AlphaFunc = GreaterEqual;		AlphaRef = 200;
+		AlphaFunc = GreaterEqual;
+		AlphaRef = 200;
 	}
 }
 
@@ -311,6 +313,7 @@ technique BillboardTech
 		// Device States
 		FillMode = Solid;
 		AlphaTestEnable = true;
-		AlphaFunc = GreaterEqual;		AlphaRef = 200;
+		AlphaFunc = GreaterEqual;
+		AlphaRef = 200;
 	}
 }
