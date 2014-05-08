@@ -106,7 +106,9 @@ void RaftMesh::Render(IDirect3DDevice9* device, ID3DXEffect* shader, int maxPass
 	mast->position.z = position.z;
 	mast->rotation = rotation;
 
-	character->position = position + characterPosition;
+	math::Vector3D rotated = math::Vector3D(position).normalize() * characterPosition;
+	rotated.y = characterPosition.y;
+	character->position = position + rotated;
 	//character->rotation = rotation;
 	// END
 
