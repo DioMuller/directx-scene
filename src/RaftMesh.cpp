@@ -10,6 +10,9 @@ RaftMesh::RaftMesh(math::Vector3D position, std::string shaderTechnique, float w
 	body = new CubeMesh(position, "TexturedTech", width, 0.1f * height, depth, L"assets/boards.png");
 	mast = new CubeMesh(position, "TexturedTech", width * 0.1f, height, depth * 0.1f, L"assets/boards.png");
 	mast->position.addY(height / 2.0f);
+
+	characterPosition = math::Vector3D(width / 3.0f, 0.3f * height, depth / 3.0f);
+	character = new Billboard(position + characterPosition, "BillboardTech", width / 8.0f , height/2.0f, L"assets/character.png");
 }
 
 
@@ -25,6 +28,7 @@ void RaftMesh::Initialize(IDirect3DDevice9* device)
 
 	body->Initialize(device);
 	mast->Initialize(device);
+	character->Initialize(device);
 }
 
 void RaftMesh::GenerateMesh()
@@ -101,10 +105,14 @@ void RaftMesh::Render(IDirect3DDevice9* device, ID3DXEffect* shader, int maxPass
 	mast->position.x = position.x;
 	mast->position.z = position.z;
 	mast->rotation = rotation;
+
+	character->position = position + characterPosition;
+	//character->rotation = rotation;
 	// END
 
 	body->Render(device, shader, maxPasses);
 	mast->Render(device, shader, maxPasses);
+	character->Render(device, shader, maxPasses);
 
 	D3DXVECTOR4 pos = D3DXVECTOR4(position.x, position.y, position.z, 0);
 	D3DXHANDLE hPosition = shader->GetParameterByName(0, "MeshPosition");

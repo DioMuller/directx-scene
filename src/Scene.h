@@ -7,6 +7,7 @@
 #include "RaftMesh.h"
 #include "TerrainMesh.h"
 #include "Camera.h"
+#include "Billboard.h"
 
 class Scene : public mage::AbstractGameLoop
 {

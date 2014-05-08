@@ -1,0 +1,25 @@
+#pragma once
+#include "Mesh.h"
+class Billboard : public Mesh
+{
+	////////////////////////////////////
+	// Attributes
+	////////////////////////////////////
+private:
+	float width;
+	float height;
+
+	////////////////////////////////////
+	// Constructor
+	////////////////////////////////////
+public:
+	Billboard(math::Vector3D position, std::string shaderTechnique, float width, float height, std::wstring texture);
+	~Billboard();
+
+	////////////////////////////////////
+	// Methods
+	////////////////////////////////////
+public:
+	void GenerateMesh();
+};
+

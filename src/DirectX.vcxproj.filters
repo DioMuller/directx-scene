@@ -110,6 +110,9 @@
     <ClInclude Include="TerrainMesh.h">
       <Filter>Meshes\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="Billboard.h">
+      <Filter>Meshes\Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="mage\Effect.cpp">
@@ -162,6 +165,9 @@
       <Filter>Rendering\Source</Filter>
     </ClCompile>
     <ClCompile Include="TerrainMesh.cpp">
+      <Filter>Meshes\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Billboard.cpp">
       <Filter>Meshes\Source</Filter>
     </ClCompile>
   </ItemGroup>

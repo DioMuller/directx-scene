@@ -10,6 +10,7 @@ uniform extern float3 Source;
 uniform extern float4 MeshPosition;
 
 uniform extern texture Texture;
+uniform extern texture AlphaTexture;
 
 ////////////////////////////////////
 // Samplers
@@ -47,7 +48,7 @@ static float k = 15.0f;
 // Angular frequency
 static float w = 1.0f;
 
-static float skyspeed = 0.1f;
+static float skyspeed = 0.03f;
 
 ////////////////////////////////////
 // Helper Functions
@@ -203,7 +204,7 @@ float4 TerrainPS(OutputVS inVS) : COLOR
 
 float4 TexturedPS(OutputVS inVS) : COLOR
 {
-	return float4(tex2D(TextureSampler, inVS.textureCoord).rgb, 1.0f);
+	return float4(tex2D(TextureSampler, inVS.textureCoord).rgba);
 }
 
 ////////////////////////////////////
@@ -284,5 +285,19 @@ technique SkyTech
 		pixelShader = compile ps_2_0 TexturedPS();
 		// Device States
 		FillMode = Solid;
+	}
+}
+
+technique BillboardTech
+{
+	pass P0
+	{
+		// Shaders
+		vertexShader = compile vs_2_0 TransformVS();
+		pixelShader = compile ps_2_0 TexturedPS();
+		// Device States
+		FillMode = Solid;
+		AlphaTestEnable = true;
+		AlphaFunc = GreaterEqual;		AlphaRef = 200;
 	}
 }

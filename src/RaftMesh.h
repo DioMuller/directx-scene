@@ -1,6 +1,7 @@
 #pragma once
 #include "Mesh.h"
 #include "CubeMesh.h"
+#include "Billboard.h"
 
 class RaftMesh : public Mesh
 {
@@ -13,6 +14,8 @@ class RaftMesh : public Mesh
 		float depth;
 		CubeMesh* mast;
 		CubeMesh* body;
+		Billboard* character;
+		math::Vector3D characterPosition;
 
 	////////////////////////////////////
 	// Constructors
