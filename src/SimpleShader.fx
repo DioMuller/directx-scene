@@ -287,13 +287,26 @@ technique SkyTech
 		FillMode = Solid;
 	}
 }
+technique CharacterTech
+{
+	pass P0
+	{
+		// Shaders
+		vertexShader = compile vs_2_0 TransformVS();
+		pixelShader = compile ps_2_0 TexturedPS();
+		// Device States
+		FillMode = Solid;
+		AlphaTestEnable = true;
+		AlphaFunc = GreaterEqual;		AlphaRef = 200;
+	}
+}
 
 technique BillboardTech
 {
 	pass P0
 	{
 		// Shaders
-		vertexShader = compile vs_2_0 TransformVS();
+		vertexShader = compile vs_2_0 SimpleVS();
 		pixelShader = compile ps_2_0 TexturedPS();
 		// Device States
 		FillMode = Solid;

@@ -12,6 +12,20 @@ Scene::Scene()
 
 Scene::~Scene()
 {
+	delete camera;
+
+	delete terrain;
+	delete plane;
+	delete raft;
+	delete dam;
+	delete skybox;
+
+	while (boxes.size() != 0)
+	{
+		CubeMesh* elem = boxes[boxes.size() - 1];
+		boxes.pop_back();
+		delete elem;
+	}
 }
 
 void Scene::setup(IDirect3DDevice9* device)
@@ -34,7 +48,7 @@ void Scene::setup(IDirect3DDevice9* device)
 	float height = 600.0f;
 
 	// Generate meshes.
-	terrain = new TerrainMesh(math::Vector3D(0, 0, 0), "TerrainTech", "assets/samplehheightmap_01.raw", 1.0f, -87.0f, width, height, 129, 129, D3DCOLOR_XRGB(150, 150, 0), true, L"assets/grass.png");
+	terrain = new TerrainMesh(math::Vector3D(0, 0, 0), "TerrainTech", "assets/samplehheightmap_01.raw", 1.0f, -87.0f, width, height, 129, 129, D3DCOLOR_XRGB(150, 150, 0), true, L"assets/grass.png", L"assets/palmtree.png", 1000 + rand() % 150);
 	terrain->Initialize(device);
 
 	plane = new PlaneMesh(math::Vector3D(0, 0, 0), "WaveTech", width, height, cols, rows, D3DCOLOR_XRGB(0, 0, 120), L"");
@@ -169,7 +183,5 @@ void Scene::onRestoreDevice(IDirect3DDevice9* device)
 
 void Scene::shutDown(IDirect3DDevice9* device)
 {
-	delete plane;
-	delete raft;
-	delete camera;
+
 }

@@ -12,7 +12,7 @@ RaftMesh::RaftMesh(math::Vector3D position, std::string shaderTechnique, float w
 	mast->position.addY(height / 2.0f);
 
 	characterPosition = math::Vector3D(width / 3.0f, 0.3f * height, depth / 3.0f);
-	character = new Billboard(position + characterPosition, "BillboardTech", width / 8.0f , height/2.0f, L"assets/character.png");
+	character = new Billboard(position + characterPosition, "CharacterTech", width / 8.0f , height/2.0f, L"assets/character.png");
 }
 
 
