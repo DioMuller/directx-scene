@@ -113,6 +113,7 @@
     <ClInclude Include="Billboard.h">
       <Filter>Meshes\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="TextureLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="mage\Effect.cpp">
@@ -170,6 +171,7 @@
     <ClCompile Include="Billboard.cpp">
       <Filter>Meshes\Source</Filter>
     </ClCompile>
+    <ClCompile Include="TextureLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="SimpleShader.fx">

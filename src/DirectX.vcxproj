@@ -104,6 +104,7 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Table.h" />
     <ClInclude Include="TerrainMesh.h" />
+    <ClInclude Include="TextureLoader.h" />
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +127,7 @@
     <ClCompile Include="RaftMesh.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="TerrainMesh.cpp" />
+    <ClCompile Include="TextureLoader.cpp" />
     <ClCompile Include="Vertex.cpp" />
     <ClCompile Include="winmain.cpp" />
   </ItemGroup>

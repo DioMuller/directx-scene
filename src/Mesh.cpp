@@ -1,5 +1,6 @@
 #include "Mesh.h"
 #include "mage/HandleError.h"
+#include "TextureLoader.h"
 
 Mesh::Mesh(math::Vector3D position, std::string shaderTechnique, std::wstring textureFile)
 {
@@ -21,7 +22,8 @@ Mesh::~Mesh()
 {
 	vertexBuffer->Release();
 	indexBuffer->Release();
-	if( texture != nullptr ) texture->Release();
+	//if( texture != nullptr ) texture->Release();
+	TextureLoader::ReleaseTexture(textureFile);
 }
 
 void Mesh::Initialize(IDirect3DDevice9* device)
@@ -37,7 +39,7 @@ void Mesh::Initialize(IDirect3DDevice9* device)
 	// Creates texture, if it exists.
 	if (textureFile != L"")
 	{
-		HR(D3DXCreateTextureFromFile(device, textureFile.c_str(), &texture));
+		texture = TextureLoader::LoadTexture(device, textureFile);
 	}
 	else
 	{
