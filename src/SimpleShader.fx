@@ -208,6 +208,16 @@ float4 TexturedPS(OutputVS inVS) : COLOR
 	return float4(tex2D(TextureSampler, inVS.textureCoord).rgba);
 }
 
+float4 ColorfulPS(OutputVS inVS) : COLOR
+{
+	return inVS.color * 1.5f;
+}
+
+float4 ColorfulTexturePS(OutputVS inVS) : COLOR
+{
+	return float4(tex2D(TextureSampler, inVS.textureCoord).rgba) * 1.5f;
+}
+
 ////////////////////////////////////
 // Techniques
 ////////////////////////////////////
